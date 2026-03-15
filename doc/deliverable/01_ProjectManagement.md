@@ -42,23 +42,19 @@ S1 Report management service <br>
 S2 User account management service <br>
 S3 Notification service <br>
 S4 Messaging service <br>
-S5 Statistics and analytics service <br>
-S6 Public portal interface <br>
-S7 Citizen registration and login system <br>
-S8 Citizen profile management <br>
-S9 Report submission interface <br>
-S10 Map-based report visualization <br>
-S11 Report search and filtering interface <br>
-S12 Report detail page <br>
-S13 Report following system <br>
-S14 Notification interface for citizens <br>
-S15 Report review dashboard <br>
-S16 Report assignment tools <br>
-S17 Report status management system <br>
-S18 Citizen–operator messaging interface <br>
-S19 System configuration panel <br>
-S20 Category management module <br>
-S21 Private statistics dashboard <br>
+S5 Portal interface <br>
+S6 Citizen registration and login system <br>
+S7 Citizen profile management <br>
+S8 Report submission interface <br>
+S9 Map-based report visualization <br>
+S10 Report search and filtering interface <br>
+S11 Report detail page <br>
+S12 Report following system <br>
+S13 Notification interface for citizens <br>
+S14 Report status management system <br>
+S15 Messaging interface  <br>
+S16 System configuration panel  <br>
+S17 Category management module <br>
 <br>
 
 **Data and Storage** <br>
@@ -85,17 +81,9 @@ I6 Map service integration (OSM) <br>
 **Public Transparency & Analytics** <br>
 
 ID Deliverable <br>
-T1 Interactive city map displaying reports <br>
-T2 Report table view with filters <br>
-T3 CSV export functionality <br>
-T4 Public statistics dashboard <br>
-A1 Reports by category charts <br>
-A2 Report trends over time <br>
-A3 Reports by status <br>
-A4 Reports by category and status <br>
-A5 Reports by reporter <br>
-A6 Top 1% reporters statistics <br>
-A7 Top 5% reporters statistics <br>
+T1 CSV export functionality <br>
+T2 Public statistics dashboard <br>
+T3 Private statistics dashboard <br>
 <br>
 
 **Documentation** <br>

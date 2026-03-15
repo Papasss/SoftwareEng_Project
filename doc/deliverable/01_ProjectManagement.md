@@ -5,54 +5,34 @@
 | S1  | Report management service                       | Software       | Backend: Core report life-cycle logic         |
 | S2  | User account management service                 | Software       | Backend: Auth and RBAC logic                  |
 | S3  | Notification service                            | Software       | Backend: Email and in-app alert engine        |
-| S4  | Messaging service                               | Software       | Backend: Communication logic                  |
-| S5  | Statistics and analytics service                | Software       | Backend: Data aggregation engine              |
-| S6  | Public portal interface                         | Software       | Citizen: Main landing page                    |
-| S7  | Citizen registration and login system           | Software       | Citizen: UI for authentication                |
-| S8  | Citizen profile management                      | Software       | Citizen: Profile and preferences settings     |
-| S9  | Report submission interface                     | Software       | Citizen: Geo-location and photo workflow      |
-| S10 | Map-based report visualization                  | Software       | Citizen: Interactive OSM visualization        |
-| S11 | Report search and filtering interface           | Software       | Citizen: Table view with filters              |
-| S12 | Report detail page                              | Software       | Citizen: Full report history and media        |
-| S13 | Report following system                         | Software       | Citizen: Subscription to report updates       |
-| S14 | Notification interface for citizens             | Software       | Citizen: User-side alert dashboard            |
-| S15 | Report review dashboard                         | Software       | Operator: Triage and verification console     |
-| S16 | Report assignment tools                         | Software       | Operator: Routing to technical offices        |
-| S17 | Report status management system                 | Software       | Operator: Status transition tools             |
-| S18 | Citizen–operator messaging interface            | Software       | Operator: Staff-side communication UI         |
-| S19 | System configuration panel                      | Software       | Admin: Global system parameters               |
-| S20 | Category management module                      | Software       | Admin: Dynamic report category tools          |
-| S21 | Private statistics dashboard                    | Software       | Admin: Secure analytical view                 |
-| I1  | User accounts database                          | Infrastructure | Data: Persistent user profile storage         |
-| I2  | Reports database                                | Infrastructure | Data: Geo-spatial report storage              |
-| I3  | Photos/media storage for reports                | Infrastructure | Data: Binary storage for attachments          |
-| I4  | Messaging database                              | Infrastructure | Data: Communication history storage           |
-| I5  | Notifications database                          | Infrastructure | Data: Logs for alerts and notifications       |
-| I6  | Cloud deployment platform                       | Infrastructure | Deployment: CI/CD and hosting setup           |
-| I7  | Application hosting environment                 | Infrastructure | Deployment: Web/App server configuration      |
-| I8  | Database server system                          | Infrastructure | Deployment: Managed DB instance               |
-| I9  | Media storage system                            | Infrastructure | Deployment: Blob/File server for media        |
-| I10 | Backup and disaster recovery system             | Infrastructure | Deployment: Data safety protocols             |
-| I11 | Map service integration                         | Infrastructure | Deployment: OSM API/Proxy integration         |
-| T1  | Interactive city map (Public)                   | Software       | Transparency: Spatial data visualization      |
-| T2  | Report table view (Public)                      | Software       | Transparency: Filterable structured data      |
-| T3  | CSV export functionality                        | Software       | Transparency: Open Data extraction tools      |
-| T4  | Public statistics dashboard                     | Software       | Transparency: Public trend charts             |
-| A1  | Reports by category charts                      | Software       | Analytics: Public distribution metrics        |
-| A2  | Report trends over time                         | Software       | Analytics: Temporal growth analysis           |
-| A3  | Reports by status                               | Software       | Analytics: Private operational metrics        |
-| A4  | Reports by category and status                  | Software       | Analytics: Private cross-reference data       |
-| A5  | Reports by reporter                             | Software       | Analytics: Private activity analytics         |
-| A6  | Top 1% reporters statistics                     | Software       | Analytics: Private power-user engagement      |
-| A7  | Top 5% reporters statistics                     | Software       | Analytics: Private engagement analysis        |
+| S4  | Messaging service                               | Software       | Backend: Communication logic                  |           |
+| S5  | Portal interface                         | Software       | Citizen: Main landing page and private sections                    |
+| S6  | Citizen registration and login system           | Software       | Citizen: UI for authentication                |
+| S7  | Citizen profile management                      | Software       | Citizen: Profile and preferences settings     |
+| S8  | Report submission interface                     | Software       | Citizen: Geo-location and photo workflow      |
+| S9 | Map-based report visualization                  | Software       | Citizen: Interactive OSM visualization        |
+| S10 | Report search and filtering interface           | Software       | Citizen: Table view with filters              |
+| S11 | Report detail page                              | Software       | Citizen: Full report history and media        |
+| S12 | Report following system                         | Software       | Citizen: Subscription to report updates       |
+| S13 | Notification interface for citizens             | Software       | Citizen: User-side alert dashboard            |
+| S14 | Report status management system                 | Software       | Operator: Status transition tools             |
+| S15 | Messaging interface                             | Software       | Users communication UI                        |
+| S16 | System configuration panel                      | Software       | Global system parameters               |
+| S17 | Category management module                      | Software       | Dynamic report category tools          |
+| I1  | Cloud deployment platform                       | Infrastructure | Deployment: CI/CD and hosting setup           |
+| I2  | Application hosting environment                 | Infrastructure | Deployment: Web/App server configuration      |
+| I3  | Database server system                          | Infrastructure | Deployment: Managed DB instance: User accounts database, Reports database, Messaging database, Notifications database               |
+| I4  | Media storage system                            | Infrastructure | Deployment: Blob/File server for media: Photos/media storage for reports        |
+| I5 | Backup and disaster recovery system             | Infrastructure | Deployment: Data safety protocols             |
+| I6 | Map service integration                         | Infrastructure | Deployment: OSM API/Proxy integration         |
+| T1  | CSV export functionality                        | Software       | Transparency: Open Data extraction tools      |
+| T2  | Public statistics dashboard                     | Software       | Transparency: Public trend charts             |
+| T3  | Private statistics dashboard                    | Software       | Transparency: Private trend charts        |
 | D1  | System requirements document                    | Documentation  | Deliverable: Functional/Technical specs       |
 | D2  | System architecture and design document         | Documentation  | Deliverable: ERD and Architectural diagrams   |
 | D3  | API documentation                               | Documentation  | Deliverable: Backend technical reference      |
-| D4  | Test plan                                       | Documentation  | Deliverable: QA and testing strategy          |
-| D5  | Test reports                                    | Documentation  | Deliverable: Validation results               |
-| D6  | Citizen user guide                              | Documentation  | Deliverable: End-user manual                  |
-| D7  | Municipal operator user guide                   | Documentation  | Deliverable: Staff operational manual         |
-| D8  | Administrator manual                            | Documentation  | Deliverable: System configuration guide       |
+| D4  | Test Documentation                                       | Documentation  | Deliverable: QA and testing strategy          |
+| D5  | User Manual and Documentation                             | Documentation  | Deliverable: End-user manual, Municipal manual and Administrator                  |
 
 
 **Software** <br>

@@ -10,15 +10,15 @@
 # Work Breakdown Structure (WBS)
 
 ### WBS with traceability to PBS
-| ID    | Work package               | Traced PBS outputs (IDs) |
-|:------|:---------------------------|:-------------------------|
-| WP 1  | PROJECT MANAGEMENT         | D8                       |
-| WP 2  | REQUIREMENTS               | D1, D3                   |
-| WP 3  | DESIGN AND ARCHITECTURES   | D2, I1, I6, I7           |
-| WP 4  | IMPLEMENTATION             | S1-S21, A1-A7, T1-T4     |
-| WP 5  | TESTING                    | D4, D5                   |
-| WP 6  | DEPLOYMENT                 | D6, D7                   |
-| WP 7  | MAINTENANCE                | ...                      |
+| ID   | Work package               | Traced PBS outputs (IDs)                    |
+|:-----|:---------------------------|:--------------------------------------------|
+| WP1  | PROJECT MANAGEMENT         | D1                                          |
+| WP2  | REQUIREMENTS               | D1                                          |
+| WP3  | DESIGN AND ARCHITECTURES   | S5, S8, S10, S13, S15, I1, I2, D2           |
+| WP4  | IMPLEMENTATION             | S1-20, I3-6                                 |
+| WP5  | TESTING                    | D4                                          |
+| WP6  | DEPLOYMENT                 | D3, D5                                      |
+| WP7  | MAINTENANCE                | S1-20, I5                                   |
 
 
 ---

@@ -1,38 +1,38 @@
 # Product Breakdown Structure (PBS)
 
-| ID  | Deliverable                             | Type           | Notes                                         |
-|:----|:----------------------------------------|:---------------|:----------------------------------------------|
-| S1  | Report management service               | Software       | Backend: Core report life-cycle logic         |
-| S2  | User account management service         | Software       | Backend: Auth and RBAC logic                  |
-| S3  | Notification service                    | Software       | Backend: Email and in-app alert engine        |
-| S4  | Messaging service                       | Software       | Backend: Communication logic                  |           |
-| S5  | Portal interface                        | Software       | Main landing page and private sections                    |
-| S6  | registration and login system           | Software       | UI for authentication                |
-| S7  | profile management                      | Software       | Profile and preferences settings     |
-| S8  | Report submission interface             | Software       | Geo-location and photo workflow      |
-| S9  | Map-based report visualization          | Software       | Interactive OSM visualization        |
-| S10 | Report search and filtering interface   | Software       | Table view with filters              |
-| S11 | Report detail page                      | Software       | Full report history and media        |
-| S12 | Report following system                 | Software       | Subscription to report updates       |
-| S13 | Notification interface                  | Software       | User-side alert dashboard            |
-| S14 | Report status management system         | Software       | Operator: Status transition tools             |
-| S15 | Messaging interface                     | Software       | Users communication UI                        |
-| S16 | System configuration panel              | Software       | Global system parameters               |
-| S17 | Category management module              | Software       | Dynamic report category tools          |
-| S18 | CSV export functionality                | Software       | Transparency: Open Data extraction tools      |
-| S19 | Private statistics dashboard            | Software       | Transparency: Public trend charts             |
-| S20 | Public statistics dashboard             | Software       | Transparency: Private trend charts        |
-| I1  | Cloud deployment platform               | Infrastructure | Deployment: CI/CD and hosting setup           |
-| I2  | Application hosting environment         | Infrastructure | Deployment: Web/App server configuration      |
-| I3  | Database server system                  | Infrastructure | Deployment: Managed DB instance: User accounts database, Reports database, Messaging database, Notifications database               |
-| I4  | Media storage system                    | Infrastructure | Deployment: Blob/File server for media: Photos/media storage for reports        |
-| I5  | Backup and disaster recovery system     | Infrastructure | Deployment: Data safety protocols             |
-| I6  | Map service integration                 | Infrastructure | Deployment: OSM API/Proxy integration         |
-| D1  | System requirements document            | Documentation  | Deliverable: Functional/Technical specs       |
-| D2  | System architecture and design document | Documentation  | Deliverable: ERD and Architectural diagrams   |
-| D3  | API documentation                       | Documentation  | Deliverable: Backend technical reference      |
-| D4  | Test Documentation                      | Documentation  | Deliverable: QA and testing strategy          |
-| D5  | User Manual and Documentation           | Documentation  | Deliverable: End-user manual, Municipal manual and Administrator                  |
+| ID  | Deliverable                           | Type           | Notes                                         |
+|:----|:--------------------------------------|:---------------|:----------------------------------------------|
+| S1  | Report management service             | Software       | Backend: Core report life-cycle logic         |
+| S2  | User account management service       | Software       | Backend: Auth and RBAC logic                  |
+| S3  | Notification service                  | Software       | Backend: Email and in-app alert engine        |
+| S4  | Messaging service                     | Software       | Backend: Communication logic                  |           |
+| S5  | Portal interface                      | Software       | Main landing page and private sections                    |
+| S6  | registration and login system         | Software       | UI for authentication                |
+| S7  | profile management                    | Software       | Profile and preferences settings     |
+| S8  | Report submission interface           | Software       | Geo-location and photo workflow      |
+| S9  | Map-based report visualization        | Software       | Interactive OSM visualization        |
+| S10 | Report search and filtering interface | Software       | Table view with filters              |
+| S11 | Report detail page                    | Software       | Full report history and media        |
+| S12 | Report following system               | Software       | Subscription to report updates       |
+| S13 | Notification interface                | Software       | User-side alert dashboard            |
+| S14 | Report status management system       | Software       | Operator: Status transition tools             |
+| S15 | Messaging interface                   | Software       | Users communication UI                        |
+| S16 | System configuration panel            | Software       | Global system parameters               |
+| S17 | Category management module            | Software       | Dynamic report category tools          |
+| S18 | CSV export functionality              | Software       | Transparency: Open Data extraction tools      |
+| S19 | Private statistics dashboard          | Software       | Transparency: Public trend charts             |
+| S20 | Public statistics dashboard           | Software       | Transparency: Private trend charts        |
+| I1  | Cloud deployment platform             | Infrastructure | Deployment: CI/CD and hosting setup           |
+| I2  | Application hosting environment       | Infrastructure | Deployment: Web/App server configuration      |
+| I3  | Database server system                | Infrastructure | Deployment: Managed DB instance: User accounts database, Reports database, Messaging database, Notifications database               |
+| I4  | Media storage system                  | Infrastructure | Deployment: Blob/File server for media: Photos/media storage for reports        |
+| I5  | Backup and disaster recovery system   | Infrastructure | Deployment: Data safety protocols             |
+| I6  | Map service integration               | Infrastructure | Deployment: OSM API/Proxy integration         |
+| D1  | Requirements document                 | Documentation  | Deliverable: Functional/Technical specs       |
+| D2  | Architecture and design document      | Documentation  | Deliverable: ERD and Architectural diagrams   |
+| D3  | API documentation                     | Documentation  | Deliverable: Backend technical reference      |
+| D4  | Test Documentation                    | Documentation  | Deliverable: QA and testing strategy          |
+| D5  | User Manual and Documentation         | Documentation  | Deliverable: End-user manual, Municipal manual and Administrator                  |
 
 
 **Software** <br>
@@ -74,8 +74,8 @@ I6 Map service integration <br>
 **Documentation** <br>
 
 ID Deliverable <br>
-D1 System requirements document <br>
-D2 System architecture and design document <br>
+D1 Requirements document <br>
+D2 Architecture and design document <br>
 D3 API documentation <br>
 D4 Test documentation <br>
 D5 User manual and documentation <br>

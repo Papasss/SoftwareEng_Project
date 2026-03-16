@@ -20,8 +20,8 @@
 | S16 | System configuration panel              | Software       | Global system parameters               |
 | S17 | Category management module              | Software       | Dynamic report category tools          |
 | S18 | CSV export functionality                | Software       | Transparency: Open Data extraction tools      |
-| T19 | Private statistics dashboard            | Software       | Transparency: Public trend charts             |
-| T20 | Public statistics dashboard             | Software       | Transparency: Private trend charts        |
+| S19 | Private statistics dashboard            | Software       | Transparency: Public trend charts             |
+| S20 | Public statistics dashboard             | Software       | Transparency: Private trend charts        |
 | I1  | Cloud deployment platform               | Infrastructure | Deployment: CI/CD and hosting setup           |
 | I2  | Application hosting environment         | Infrastructure | Deployment: Web/App server configuration      |
 | I3  | Database server system                  | Infrastructure | Deployment: Managed DB instance: User accounts database, Reports database, Messaging database, Notifications database               |

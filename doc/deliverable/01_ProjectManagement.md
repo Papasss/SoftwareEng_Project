@@ -6,19 +6,19 @@
 | S2  | User account management service       | Software       | Backend: Auth and RBAC logic                  |
 | S3  | Notification service                  | Software       | Backend: Email and in-app alert engine        |
 | S4  | Messaging service                     | Software       | Backend: Communication logic                  |           |
-| S5  | Portal interface                      | Software       | Main landing page and private sections                    |
-| S6  | registration and login system         | Software       | UI for authentication                |
-| S7  | profile management                    | Software       | Profile and preferences settings     |
-| S8  | Report submission interface           | Software       | Geo-location and photo workflow      |
-| S9  | Map-based report visualization        | Software       | Interactive OSM visualization        |
-| S10 | Report search and filtering interface | Software       | Table view with filters              |
-| S11 | Report detail page                    | Software       | Full report history and media        |
-| S12 | Report following system               | Software       | Subscription to report updates       |
-| S13 | Notification interface                | Software       | User-side alert dashboard            |
-| S14 | Report status management system       | Software       | Operator: Status transition tools             |
-| S15 | Messaging interface                   | Software       | Users communication UI                        |
-| S16 | System configuration panel            | Software       | Global system parameters               |
-| S17 | Category management module            | Software       | Dynamic report category tools          |
+| S5  | Portal interface                      | Software       | Frontend: Main landing page and private sections                    |
+| S6  | Registration and login system         | Software       | Frontend: UI for authentication                |
+| S7  | Profile management                    | Software       | Frontend: Profile and preferences settings     |
+| S8  | Report submission interface           | Software       | Frontend: Geo-location and photo workflow      |
+| S9  | Map-based report visualization        | Software       | Frontend: Interactive OSM visualization        |
+| S10 | Report search and filtering interface | Software       | Frontend: Table view with filters              |
+| S11 | Report detail page                    | Software       | Frontend: Full report history and media        |
+| S12 | Report following system               | Software       | Frontend: Subscription to report updates       |
+| S13 | Notification interface                | Software       | Frontend: User-side alert dashboard            |
+| S14 | Report status management system       | Software       | Frontend: Status transition tools             |
+| S15 | Messaging interface                   | Software       | Frontend: Users communication UI                        |
+| S16 | System configuration panel            | Software       | Frontend: Global system parameters               |
+| S17 | Category management module            | Software       | Frontend: Dynamic report category tools          |
 | S18 | CSV export functionality              | Software       | Transparency: Open Data extraction tools      |
 | S19 | Private statistics dashboard          | Software       | Transparency: Public trend charts             |
 | S20 | Public statistics dashboard           | Software       | Transparency: Private trend charts        |
@@ -80,6 +80,10 @@ D3 API documentation <br>
 D4 Test documentation <br>
 D5 User manual and documentation <br>
 <br>
+
+**Description** <br>
+The first breakdown concerns the project’s main areas, namely the technical, infrastructure and documentation aspects; this breakdown enables us to allocate resources to individual modules, particularly the ‘software’ section, where functionalities need to be developed using different development environments and independent working groups; for this reason, and given the considerable number of tasks involved, it was decided to further divide it into three sections: ‘Back-end’, ‘Front-end’ and ‘Transparency’.
+Each deliverable is intended as a package of tasks required to develop a product component that provides a service to the user, as specified in the project documentation.
 
 ---
 

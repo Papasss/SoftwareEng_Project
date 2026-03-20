@@ -22,7 +22,7 @@
 
 
 **Description** <br>
-The division into project phases followed the iterative software development model, which places great emphasis on avoiding a monolithic, one-way process. For this reason, it was decided to include the ‘Maintenance’ phase as a fundamental element for the future of the project. Furthermore, importance was attached to the project’s design phases, understood as business decisions, by initially including the ‘Project Management’ phase, which is useful as the client is no longer merely a client but is involved in the process steps, engaging in constant dialogue with the project manager.
+The division into project phases followed the incremental software development model, which places great emphasis on avoiding a monolithic, one-way process. For this reason, it was decided to include the ‘Maintenance’ phase as a fundamental element for the future of the project. Furthermore, importance was attached to the project’s design phases, understood as business decisions, by initially including the ‘Project Management’ phase, which is useful as the client is no longer merely a client but is involved in the process steps, engaging in constant dialogue with the project manager.
 
 ---
 

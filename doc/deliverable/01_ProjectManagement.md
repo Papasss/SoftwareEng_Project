@@ -90,10 +90,19 @@ Each deliverable is intended as a package of tasks required to develop a product
 # Work Breakdown Structure (WBS)
 
 ### WBS with traceability to PBS
-| ID  | Work package | Traced PBS outputs (IDs) |
-|:----|:-------------|:--------------------------|
-| #.# |              |                           |
+| ID   | Work package               | Traced PBS outputs (IDs)                    |
+|:-----|:---------------------------|:--------------------------------------------|
+| WP1  | PROJECT MANAGEMENT         | D1                                          |
+| WP2  | REQUIREMENTS               | D1                                          |
+| WP3  | DESIGN AND ARCHITECTURES   | S5, S8, S10, S13, S15, I1, I2, D2           |
+| WP4  | IMPLEMENTATION             | S1-20, I3-6                                 |
+| WP5  | TESTING                    | D4                                          |
+| WP6  | DEPLOYMENT                 | D3, D5                                      |
+| WP7  | MAINTENANCE                | S1-20, I5                                   |
 
+
+**Description** <br>
+The division into project phases followed the incremental software development model, which places great emphasis on avoiding a monolithic, one-way process. For this reason, it was decided to include the ‘Maintenance’ phase as a fundamental element for the future of the project. Furthermore, importance was attached to the project’s design phases, understood as business decisions, by initially including the ‘Project Management’ phase, which is useful as the client is no longer merely a client but is involved in the process steps, engaging in constant dialogue with the project manager.
 
 ---
 

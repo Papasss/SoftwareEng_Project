@@ -1,15 +1,15 @@
 # Product Breakdown Structure (PBS)
 
-| ID  | Deliverable                           | Type           | Notes                                         |
-|:----|:--------------------------------------|:---------------|:----------------------------------------------|
-| S1  | Report management service             | Software       | Backend: Core report life-cycle logic         |
-| S2  | User account management service       | Software       | Backend: Auth and RBAC logic                  |
-| S3  | Notification service                  | Software       | Backend: Email and in-app alert engine        |
-| S4  | Messaging service                     | Software       | Backend: Communication logic                  |           |
-| S5  | Portal interface                      | Software       | Frontend: Main landing page and private sections                    |
-| S6  | Registration and login system         | Software       | Frontend: UI for authentication                |
-| S7  | Profile management                    | Software       | Frontend: Profile and preferences settings     |
-| S8  | Report submission interface           | Software       | Frontend: Geo-location and photo workflow      |
+| ID  | Deliverable                           | Type           | Notes                                            |
+|:----|:--------------------------------------|:---------------|:-------------------------------------------------|
+| S1  | Report management service             | Software       | Backend: Core report life-cycle logic            |
+| S2  | User account management service       | Software       | Backend: Authentication logic                    |
+| S3  | Notification service                  | Software       | Backend: Email and in-app alert engine           |
+| S4  | Messaging service                     | Software       | Backend: Communication logic                     |           
+| S5  | Portal interface                      | Software       | Frontend: Main landing page and private sections |
+| S6  | Registration and login interface      | Software       | Frontend: UI for authentication                  |
+| S7  | Profile management                    | Software       | Frontend: Profile and preferences settings       |
+| S8  | Report submission interface           | Software       | Frontend: UI for Report Submission.            |
 | S9  | Map-based report visualization        | Software       | Frontend: Interactive OSM visualization        |
 | S10 | Report search and filtering interface | Software       | Frontend: Table view with filters              |
 | S11 | Report detail page                    | Software       | Frontend: Full report history and media        |
@@ -43,7 +43,7 @@ S2 User account management service <br>
 S3 Notification service <br>
 S4 Messaging service <br>
 S5 Portal interface <br>
-S6 registration and login system <br>
+S6 registration and login interface <br>
 S7 profile management <br>
 S8 Report submission interface <br>
 S9 Map-based report visualization <br>

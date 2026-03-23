@@ -45,6 +45,9 @@
 ## Critical path
 `WP1.1 → WP2.1 → WP2.2 → WP3.1 → WP4.1 → WP4.2 → WP5.1 → WP5.2 → WP5.3 → WP5.4 → WP6.2 → WP6.3`
 
+**Description** <br>
+The Gantt chart strictly follows the structure defined in the WBS table, where tasks from the same area have been grouped together and timelines and dependencies have been defined. This is particularly the case during the implementation and initial testing phases, given the strong interdependencies and overlapping work involved. The project timeline has been set at 10 working months, and the metric used to define ‘Critical’ steps involves prioritising the task that allows the team to move on to the next area of the WBS, i.e. to proceed with the agreed schedule. Finally, regarding the ‘Maintenance’ section, only the ‘adjustments or bug fixes’ task has been included, as it is the only activity that could be part of the first delivery; the rest concerns future phases of the project.
+
 
 ---
 

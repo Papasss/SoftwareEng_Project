@@ -137,8 +137,18 @@ Risk level thresholds (by exposure):
 
 
 ## Risks table
-| ID | Risk | Category | P | I | P×I | Level | Mitigation / Response strategy |
-|:---|:-----|:---------|--:|--:|----:|:------|:-------------------------------|
-|  |      |          |   |   |     |       |                                |
-
+| ID  | Risk                    | Category            | P  | I  | P×I | Level     | Mitigation / Response strategy                     |
+|:----|:------------------------|:--------------------|---:|---:|----:|:----------|:---------------------------------------------------|
+| R1  | Staff retention         | Organizational      | 4  | 3  | 12  | High      | assign appropriate tasks to staff and ensure they receive benefits and training |
+| R2  | Optimistic estimates    | Organizational      | 3  | 4  | 12  | High      | increase efforts from every member of the project and negotiate a new deadline |
+| R3  | Budget cut              | Organizational      | 3  | 5  | 15  | High      | consider to reduce the profit margin     |
+| R4  | Content switch          | Organizational      | 4  | 2  | 8   | Medium    | define staff-group assignment and increase staff assumption    |
+| R5  | Communication           | Operational         | 3  | 3  | 9   | Medium    | use proper language for each stakeholder  |
+| R6  | Dependecies             | Operational         | 3  | 4  | 12  | High      | increase effort on the task blocking the process with more resources  |
+| R7  | Know-how lack           | Operational         | 2  | 4  | 8   | Medium    | promote more intensive courses and training sessions  |
+| R8  | Standard procedure lack | Operational         | 2  | 3  | 6   | Medium    | invest more time to align every stakeholder and use same operational tools  |
+| R9  | Scope creep             | Requirements/Scope  | 3  | 3  | 9   | Medium    |   |
+| R10 |            | Requirements/Scope  | 2  | 4  | 8   | Medium    | promote more intensive courses and training sessions  |
+| R11 |            | Requirements/Scope  | 2  | 4  | 8   | Medium    | promote more intensive courses and training sessions  |
+| R12 |            | Requirements/Scope  | 2  | 4  | 8   | Medium    | promote more intensive courses and training sessions  |
 

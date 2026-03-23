@@ -1,8 +1,15 @@
 # 1) Stakeholders
 
-| ID     | Stakeholder name | Description | Role | Main concerns |
-|:-------|:-----------------|:------------|:-----|:--------------|
-| STK-## |                  |             |      |               |
+| ID     | Stakeholder name |                                                Description                                      | Role | Main concerns |
+|:-------|:-----------------|:------------------------------------------------------------------------------------------------|:-----|:--------------|
+| STK-01 | Visitor                 | Person who accesses the platform to browse public reports and statistics without authentication | End user            | Easy access to information, usability, transparency               |
+| STK-02 | Citizen                 | Person who creates an account to submit reports, track their evolution, follow reports, and communicate with municipal operators | End user            | Easy report submission, tracking updates, receiving notifications |
+| STK-03 | Municipal Operator      | Person who reviews reports, verifies them, updates their status, and communicates with citizens | Operational user    | Efficient report handling, clear communication, workload management |
+| STK-04 | Administrator           | Person who manages system configuration and accesses advanced analytics and reporting features | Administrative user | System control, monitoring, access to detailed statistics         |
+| STK-05 | Municipality of Turin   | Public authority commissioning the system to improve citizen participation and urban issue management | Client organisation | Transparency, efficiency, public satisfaction                     |
+| STK-06 | Authentication system   | Service used to manage user registration, login, and email verification                      | External system     | Security, reliability of authentication                           |
+| STK-07 | Map service             | Service used to provide geo-location and map visualization of reports                    | External system     | Accuracy of location data, availability                           |
+| STK-08 | Notification service    | Service used to notify users through in-platform and email notifications                     | External system     | Timely delivery of notifications, reliability                     |
 
 ---
 

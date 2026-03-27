@@ -156,8 +156,24 @@ Risk level thresholds (by exposure):
 
 
 ## Risks table
-| ID | Risk | Category | P | I | P×I | Level | Mitigation / Response strategy |
-|:---|:-----|:---------|--:|--:|----:|:------|:-------------------------------|
-|  |      |          |   |   |     |       |                                |
+| ID  | Risk                         | Category            | P  | I  | P×I | Level     | Mitigation / Response strategy                     |
+|:----|:------------------------|:--------------------|---:|---:|----:|:----------|:---------------------------------------------------|
+| R1  | Staff retention              | Organizational        | 4  | 3  | 12  | High      | assign appropriate tasks to staff and ensure they receive benefits and training |
+| R2  | Optimistic estimates         | Organizational        | 3  | 4  | 12  | High      | increase efforts from every member of the project and negotiate a new deadline |
+| R3  | Budget cut                   | Organizational        | 4  | 5  | 20  | Very High | consider to reduce the profit margin     |
+| R4  | Content switch               | Organizational        | 4  | 2  | 8   | Medium    | define staff-group assignment and increase staff assumption    |
+| R5  | Communication                | Operational           | 3  | 3  | 9   | Medium    | use proper language for each stakeholder  |
+| R6  | Standard procedure lack      | Operational           | 2  | 3  | 6   | Medium    | invest more time to align every stakeholder and use same operational tools  |
+| R7  | Know-how lack                | Operational/Technical | 2  | 4  | 8   | Medium    | promote more intensive courses and training sessions  |
+| R8  | Scope creep                  | Requirements/Scope    | 4  | 4  | 16  | High      | rewrite scheduled activities with business and make precise requirements  |
+| R9  | Unclear requirements         | Requirements/Scope    | 3  | 4  | 12  | High      | schedule frequently calls with business in order to prevent misunderstandings  |
+| R10 | Instability of Dev platform  | Technical             | 2  | 3  | 6   | Medium    | if happen often, consider to reallocate resources to another part of the project meanwhile platform is not avaible  |
+| R11 | Technical debit              | Technical             | 3  | 4  | 12  | High      | make it simple but think for the future feature and for scalability  |
+| R12 | Test coverage                | Technical             | 4  | 5  | 20  | Very High | follow a well-established methodology, such as Scrum, to avoid releasing untested code  |
+| R13 | Resources consumption        | Technical             | 3  | 3  | 9   | Medium    | focus on the quality of the code and not the quantity, consider pair programming  |
+| R14 | Data breach                  | Security/Privacy      | 2  | 5  | 10  | High      | creation of backup data and if necessary block access to app  |
+| R15 | COTS instability             | External/Third-party  | 2  | 2  | 4   | Low       | using always the latest version of components and if necessary change it  |
 
 
+**Description** <br>
+The two more critical risks are 'Budget cut' and 'Test coverage' not only because they affect everyone’s work within the project, whatever their role, but also because they are activities for which we are accountable to the business and that part is always critical. Then it is not always possible to know which risks will materialise, particularly unforeseen ones; for this reason, the project manager should constantly assess the resources at their disposal and determine the appropriate measures to mitigate the problem, like 'early validation' and 'adding buffer', especially if time and staff are running short.

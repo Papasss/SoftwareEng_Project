@@ -144,19 +144,16 @@ Risk level thresholds (by exposure):
 | R3  | Budget cut                   | Organizational        | 4  | 5  | 20  | Very High | consider to reduce the profit margin     |
 | R4  | Content switch               | Organizational        | 4  | 2  | 8   | Medium    | define staff-group assignment and increase staff assumption    |
 | R5  | Communication                | Operational           | 3  | 3  | 9   | Medium    | use proper language for each stakeholder  |
-| R6  | Dependecies                  | Operational           | 3  | 4  | 12  | High      | increase effort on the task blocking the process with more resources  |
-| R7  | Know-how lack                | Operational           | 2  | 4  | 8   | Medium    | promote more intensive courses and training sessions  |
-| R8  | Standard procedure lack      | Operational           | 2  | 3  | 6   | Medium    | invest more time to align every stakeholder and use same operational tools  |
-| R9  | Scope creep                  | Requirements/Scope    | 4  | 4  | 16  | High      | rewrite scheduled activities with business and make precise requirements  |
-| R10 | Confusional requirements     | Requirements/Scope    | 3  | 4  | 12  | High      | schedule frequently calls with business in order to prevent misunderstandings  |
-| R11 | Adding functionality         | Requirements/Scope    | 2  | 3  | 6   | Medium    | check every time which part of the requirements has to be implemented  |
-| R12 | Instability of Dev platform  | Technical             | 2  | 3  | 6   | Medium    | if happen often, consider to reallocate resources to another part of the project meanwhile platform is not avaible  |
-| R13 | Using new technologies       | Technical             | 2  | 2  | 4   | Low       | give an extra time to dev team to understand better dev tools and business to accept that choice  |
-| R14 | Technical debit              | Technical             | 3  | 4  | 12  | High      | make it simple but think for the future feature and for scalability  |
-| R15 | Test coverage                | Technical             | 4  | 5  | 20  | Very High | follow a well-established methodology, such as Scrum, to avoid releasing untested code  |
-| R16 | Resources consumption        | Technical             | 3  | 3  | 9   | Medium    | focus on the quality of the code and not the quantity, consider pair programming  |
-| R17 | Data breach                  | Security/Privacy      | 2  | 5  | 10  | High      | creation of backup data and if necessary block access to app  |
-| R18 | COTS instability             | External/Third-party  | 2  | 2  | 4   | Low       | using always the latest version of components and if necessary change it  |
+| R6  | Standard procedure lack      | Operational           | 2  | 3  | 6   | Medium    | invest more time to align every stakeholder and use same operational tools  |
+| R7  | Know-how lack                | Operational/Technical | 2  | 4  | 8   | Medium    | promote more intensive courses and training sessions  |
+| R8  | Scope creep                  | Requirements/Scope    | 4  | 4  | 16  | High      | rewrite scheduled activities with business and make precise requirements  |
+| R9  | Unclear requirements         | Requirements/Scope    | 3  | 4  | 12  | High      | schedule frequently calls with business in order to prevent misunderstandings  |
+| R10 | Instability of Dev platform  | Technical             | 2  | 3  | 6   | Medium    | if happen often, consider to reallocate resources to another part of the project meanwhile platform is not avaible  |
+| R11 | Technical debit              | Technical             | 3  | 4  | 12  | High      | make it simple but think for the future feature and for scalability  |
+| R12 | Test coverage                | Technical             | 4  | 5  | 20  | Very High | follow a well-established methodology, such as Scrum, to avoid releasing untested code  |
+| R13 | Resources consumption        | Technical             | 3  | 3  | 9   | Medium    | focus on the quality of the code and not the quantity, consider pair programming  |
+| R14 | Data breach                  | Security/Privacy      | 2  | 5  | 10  | High      | creation of backup data and if necessary block access to app  |
+| R15 | COTS instability             | External/Third-party  | 2  | 2  | 4   | Low       | using always the latest version of components and if necessary change it  |
 
 
 **Description** <br>

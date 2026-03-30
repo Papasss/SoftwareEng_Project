@@ -10,7 +10,7 @@
 | STK-06 | Map service             | Service used to provide geo-location and map visualization of reports                    | External system     | Accuracy of location data, availability                           |
 | STK-07 | Notification service    | Service used to notify users through in-platform and email notifications                     | External system     | Timely delivery of notifications, reliability                     |
 | STK-08 | Developer      | People work on the technical side of the project        | Technician      | Developing technical part of the project         |
-| STK-9 | Project Manager      | People managing developers and activities         | Manager     | Interfacing between technical group and business     |
+| STK-09 | Project Manager      | People managing developers and activities         | Manager     | Interfacing between technical group and business     |
 
 ---
 

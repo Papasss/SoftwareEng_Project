@@ -26,7 +26,13 @@ Attach your context diagram as an image under `../data/img/` and link it here:
 
 | ID     | Interface       | Actor                       | Physical interface                     | Logical interface     |
 |:-------|:----------------|:----------------------------|:---------------------------------------|:----------------------|
-| IF-01  |     |                    |  |   |
+| IF-01  | User access     | Visitor                     | Smartphone/PC with internet connection | Web GUI               |
+| IF-02  | User access     | Citizen                     | Smartphone/PC with internet connection | Web GUI               |
+| IF-03  | User access     | Municipal Operator          | Smartphone/PC with internet connection | Web GUI               |
+| IF-04  | User access     | Administrator               | Smartphone/PC with internet connection | Web GUI               |
+| IF-05  | Authentication  | Authentication system       | Internet connection                    | Authentication APIs   |
+| IF-06  | Map interaction | Map service (OpenStreetMap) | Internet connection                    | Map APIs              |
+| IF-07  | Notifications   | Notification service        | Internet connection                    | Notification APIs     |
 
 ---
 

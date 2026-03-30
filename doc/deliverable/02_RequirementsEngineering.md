@@ -73,9 +73,25 @@ Attach your context diagram as an image under `../data/img/` and link it here:
 
 # 6) Functional Requirements (FR)
 
-| ID    | Requirement statement (The system shall…) | Priority | User story ID | Notes |
-|:------|:------------------------------------------|:---------|:--------------|:------|
-| FR-XX |                                           |          |               |       |
+| ID | Requirement statement (The system shall…) | Priority  | User story ID | Notes |
+|:---|:------------------------------------------|:----------|:----------------|:------|
+| FR-01 | The system shall allow visitors to browse reports on a map interface | Critical  | US-01 | Public access feature |
+| FR-02 | The system shall allow users to filter reports by category, status, and time | Critical  | US-02 | Applies to map and table views |
+| FR-03 | The system shall allow users to register an account with email verification | Critical  | US-03 | Requires authentication system |
+| FR-04 | The system shall allow registered users to log in securely | Critical  | US-04 | Authentication required |
+| FR-05 | The system shall allow citizens to submit reports including location, description, category, and up to 3 images | Critical  | US-05 | Core functionality |
+| FR-06 | The system shall allow citizens to mark reports as anonymous for public display | Important    | US-06 | Privacy feature |
+| FR-07 | The system shall allow users to view and track the status of reports | Critical  | US-07 | Transparency requirement |
+| FR-08 | The system shall allow users to follow reports submitted by others | Important    | US-08 | Engagement feature |
+| FR-09 | The system shall send notifications to users when report status changes | Critical  | US-09 | Notification system dependency |
+| FR-10 | The system shall allow communication between citizens and municipal operators through messaging | Critical  | US-10 | Two-way communication |
+| FR-11 | The system shall allow municipal operators to review submitted reports | Critical  | US-11 | Validation process |
+| FR-12 | The system shall allow municipal operators to assign reports to appropriate departments or units | Important    | US-12 | Assumed workflow |
+| FR-13 | The system shall allow municipal operators to update the status of reports | Critical  | US-13 | Status lifecycle |
+| FR-14 | The system shall allow municipal operators to communicate with citizens regarding reports | Important  | US-14 | Messaging feature |
+| FR-15 | The system shall allow administrators to manage system configurations and access analytics | Important    | US-15 | Merged admin functionality |
+| FR-16 | The system shall allow users to export report data in CSV format | Optional  | US-16 | Data export |
+| FR-17 | The system shall provide public access to aggregated statistics about reports | Important | US-17 | Transparency feature |
 
 
 ---

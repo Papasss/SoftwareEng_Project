@@ -62,3 +62,4 @@ Attach your context diagram as an image under `../data/img/` and link it here:
 | NFR-08 | Compatibility | The system shall be accessible on common devices and browsers | Support latest versions of Chrome, Firefox, Safari | Testing | Medium | Web-based system |
 | NFR-09 | Maintainability | The system shall be designed for easy maintenance and updates | Code modularity and documentation available | Code review / inspection | Medium | Important for long-term use |
 | NFR-10 | Data Integrity | The system shall ensure accuracy and consistency of stored data | No data loss or corruption in normal operation | Testing / validation | High | Applies to reports and user data |
+| NFR-11 | Localization | The system shall support multiple languages for the user interface | Support at least English and Italian languages | Testing / inspection | Low | Optional feature for broader accessibility |

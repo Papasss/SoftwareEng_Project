@@ -40,11 +40,8 @@ Attach your context diagram as an image under `../data/img/` and link it here:
 
 | ID     | Name | Role | Background / Context | Goals | Constraints | Devices / Usage setting | Accessibility / Additional needs |
 |:-------|:-----|:-----|:---------------------|:------|:------------|:------------------------|:---------------------------------|
-| PER-01 | Andrea Russo | Registered Citizen (Occasional Reporter) | Andrea is a 34-year-old employee in Turin who commutes daily using public transport and walking. He is comfortable with mobile apps but prefers quick and simple interactions. He often notices urban issues such as broken streetlights or waste while commuting. | Submit reports quickly with minimal steps, attach a photo, and track updates easily | Limited time, frequent distractions, uncertainty in choosing categories, low tolerance for complex workflows | Smartphone, mainly on mobile data while outdoors | Prefers simple UI, clear instructions, minimal typing |
-| PER-02 | Giulia Bianchi | Active Citizen (Frequent Reporter) | Giulia is a 29-year-old resident actively involved in community improvement. She regularly reports issues and follows multiple reports to stay informed about city conditions. | Submit detailed reports, track multiple issues, receive timely updates | Needs efficient management of multiple reports, risk of notification overload | Smartphone and laptop | Needs organized dashboard, filtering options, notification control |
-| PER-03 | Luca Ferraro | Municipal Operator | Luca is a 46-year-old municipal employee responsible for reviewing and managing reports related to infrastructure. He works in an office environment and handles a high volume of reports daily. | Review and validate reports efficiently, assign tasks, update status, communicate with citizens | High workload, time pressure, requires accurate and complete report information | Desktop computer in office | Needs structured data, filtering tools, efficient workflow interface |
-| PER-04 | Alessia Conti | System Administrator | Alessia is a 37-year-old IT administrator responsible for maintaining the system and monitoring analytics. She ensures system reliability and supports decision-making through data insights. | Monitor system performance, access analytics, manage configurations | Requires reliable data, system stability, and clear analytics visualization | Desktop or laptop | Needs detailed dashboards and clear data visualization |
-| PER-05 | Elena Greco | Visitor (Unregistered User) | Elena is a 31-year-old resident who occasionally checks city conditions online but does not want to create an account. She uses the platform mainly to stay informed about issues in her neighborhood. | Browse reports on the map, filter issues by category or status, view public statistics | Limited functionality without login, cannot submit or interact with reports, expects quick access to information | Smartphone or laptop, usually at home or on the go | Needs intuitive navigation, clear map visualization, and fast loading pages |
+| PER-01 |      |      |                      |       |             |                         |                                  |
+
 ---
 
 # 5) User Stories
@@ -100,4 +97,14 @@ Attach your context diagram as an image under `../data/img/` and link it here:
 
 | ID     | Category | Requirement statement | Metric / Target | Verification                           | Priority | Notes |
 |:-------|:---------|:----------------------|:----------------|:---------------------------------------|:---------|:------|
-| NFR-XX |          |                       |                 |                                        |          |       |
+| NFR-01 | Performance | The system shall respond to user requests within an acceptable time | ≤ 2 seconds for 95% of requests | Performance testing | High | Applies to report browsing and submission |
+| NFR-02 | Availability | The system shall be available to users at all times except scheduled maintenance | ≥ 99% uptime per month | Monitoring / logs | High | Critical for public access |
+| NFR-03 | Usability | The system shall allow users to complete report submission with minimal effort | Report submission completed in ≤ 2 minutes by 90% of users | Usability testing | High | Based on citizen persona needs |
+| NFR-04 | Security | The system shall protect user data and authentication credentials | Passwords encrypted and secure login enforced | Security testing / inspection | High | Includes authentication system |
+| NFR-05 | Privacy | The system shall ensure that anonymous reports do not expose user identity publicly | 100% of anonymous reports hide user identity | Inspection / testing | High | Critical for user trust |
+| NFR-06 | Reliability | The system shall ensure that notifications are delivered reliably | ≥ 95% notification delivery success rate | Monitoring / logs | Medium | Depends on notification service |
+| NFR-07 | Scalability | The system shall handle increasing number of users and reports without degradation | Support at least 10,000 concurrent users | Load testing | Medium | Future scalability |
+| NFR-08 | Compatibility | The system shall be accessible on common devices and browsers | Support latest versions of Chrome, Firefox, Safari | Testing | Medium | Web-based system |
+| NFR-09 | Maintainability | The system shall be designed for easy maintenance and updates | Code modularity and documentation available | Code review / inspection | Medium | Important for long-term use |
+| NFR-10 | Data Integrity | The system shall ensure accuracy and consistency of stored data | No data loss or corruption in normal operation | Testing / validation | High | Applies to reports and user data |
+| NFR-11 | Localization | The system shall support multiple languages for the user interface | Support at least English and Italian languages | Testing / inspection | Low | Optional feature for broader accessibility |

@@ -18,7 +18,7 @@ Add one narrative for each use case shown in the diagram.
 | Intention in Context       | To allow an unregistered user to create an account to become a Citizen, or a registered user to modify their personal data. |
 | Primary actor              | Citizen, Operator, Administrator |
 | Supporting actors          | None |
-| Stakeholders' interests    | - Citizen: Wants to register or update their data quickly and securely.<br>- Administrator: Wants accurate user data compliant with privacy regulations to track the validity of reports. |
+| Stakeholders' interests    | - Citizen/Operator: Wants to register or update their data quickly and securely.<br>- Administrator: Wants accurate user data compliant with privacy regulations to track the validity of reports. |
 | Precondition               | The system must be online. The user must have a valid email address. |
 | Minimum guarantees         | Partially entered data is not saved if the procedure is interrupted. Existing data is not overwritten in the event of a system error. |
 | Success guarantees         | A new profile is created in the database, or existing profile data is updated. | 
@@ -41,7 +41,7 @@ Add one narrative for each use case shown in the diagram.
 | Minimum guarantees         | The report is not saved in case of a network failure; the user is notified of the error. |
 | Success guarantees         | The report is saved in the system with a "New" status | 
 | Trigger                    | The Citizen selects the "Submit new report" option. |
-| Main success scenario      | 1. The Citizen starts the new report procedure.<br>2. The system executes `<<include>>` UC-01 (Profile registration and management) to verify the user's identity or prompt authentication.<br>3. The system displays the report form.<br>4. The Citizen enters the details of the problem (text, photos).<br>5. The Citizen requests to set the location on the map.<br>6. The system queries the Map System External System `<<support>>` to display the map and obtain the coordinates.<br>7. The Map System returns the positional data.<br>8. The Citizen confirms the submission.<br>9. The system saves the report and provides a ticket number. |
+| Main success scenario      | 1. The Citizen starts the new report procedure.<br>2. The system executes `<<include>>` UC-01 (Profile registration and management) to verify the user's identity or prompt authentication.<br>3. The system displays the report form.<br>4. The Citizen enters the details of the problem (text, photos).<br>5. The Citizen requests to set the location on the map.<br>6. The system queries the Map External System `<<support>>` to display the map and obtain the coordinates.<br>7. The Map System returns the positional data.<br>8. The Citizen confirms the submission.<br>9. The system saves the report and provides a ticket number. |
 | Extensions                 | - 2a. Authentication failed: The process is aborted.<br>- 6a. Map System unavailable: The system allows text-based manual entry of the address as an alternative.<br>- 9a. Contextual tracking: The system proposes to execute `<<extend>>` UC-03 (Track and view report) to immediately view the status of the newly created report. |
 
 <br>
@@ -52,7 +52,7 @@ Add one narrative for each use case shown in the diagram.
 | Scope                      | Participium App System |
 | Level                      | User Goal | 
 | Intention in Context       | To allow users to view the details of an existing report and track its progress. |
-| Primary actor              | Visitor (public visibility) / Citizen (private/detailed visibility) |
+| Primary actor              | Visitor (public visibility) / Citizen (private/detailed visibility) / Operator |
 | Supporting actors          | None |
 | Stakeholders' interests    | - Visitor/Citizen: Wants to know if the reported problem has been addressed or resolved. |
 | Precondition               | At least one report must exist in the system. |
@@ -70,7 +70,7 @@ Add one narrative for each use case shown in the diagram.
 | Scope                      | Participium App System |
 | Level                      | User Goal | 
 | Intention in Context       | To allow anyone (even unregistered users) to download aggregated data and public reporting on platform usage. |
-| Primary actor              | Visitor |
+| Primary actor              | Visitor/Citizen |
 | Supporting actors          | None |
 | Stakeholders' interests    | - Visitor/Citizen: Wants to obtain Open Data regarding citizen reports. |
 | Precondition               | The system must have pre-calculated or generatable statistical data. |

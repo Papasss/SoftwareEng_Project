@@ -101,3 +101,12 @@ def test_verify_transition_not_allowed() -> None:
 
     with pytest.raises(ValidationError):
         report_service.update_status(report_id=report.id, operator=OPERATOR_USER, next_status_value=ReportStatus.RESOLVED)
+
+
+# CORRECT UPDATE
+@pytest.mark.skip(reason="Disabled.")
+def test_verify_update_status_success() -> None:
+    report_service = ReportService()
+
+    report = report_service.update_status(report_id=report.id, operator=OPERATOR_USER, next_status_value=ReportStatus.REJECTED, note="The problem no longer exists.")
+    assert report.status == ReportStatus.REJECTED

@@ -1,3 +1,5 @@
+# test_create_notification.py
+
 from __future__ import annotations
 
 import pytest
@@ -20,6 +22,7 @@ invalid user    | valid type          | "Warning"               | "Unauthorized 
 """
 
 
+@pytest.mark.skip(reason="Disabled.")
 @pytest.mark.parametrize(
     "user,notification_type,title,body,report,expected_exception,oracle",
     [

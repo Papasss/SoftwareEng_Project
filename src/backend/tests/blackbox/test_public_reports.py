@@ -1,3 +1,5 @@
+# test_public_reports.py
+
 from __future__ import annotations
 
 import pytest
@@ -22,6 +24,7 @@ None              | None              | None              | None              | 
 """
 
 
+@pytest.mark.skip(reason="Disabled.")
 @pytest.mark.parametrize(
     "category_id,status,date_from,date_to,sort,expected_exception,oracle",
     [

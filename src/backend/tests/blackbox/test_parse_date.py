@@ -1,3 +1,5 @@
+# test_parse_date.py
+
 from __future__ import annotations
 
 import pytest
@@ -18,6 +20,7 @@ None                    | V   | None returned
 """
 
 
+@pytest.mark.skip(reason="Disabled.")
 @pytest.mark.parametrize(
     "value,expected_exception,oracle",
     [

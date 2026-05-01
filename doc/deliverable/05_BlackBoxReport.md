@@ -166,13 +166,13 @@ Prototype: `create_notification(user: User | None, notification_type: str, title
 
 | TC-ID | user | notification_type | title | body | report | Expected | Fixture |
 |:------|:------|:------------------|:------|:------|:--------|:----------|:---------|
-| NOTIF-01 | Valid user | Valid type | `"Report updated"` | `"Your report status changed"` | Valid report | Notification created | Existing user and report |
-| NOTIF-02 | `None` | System type | `"Maintenance notice"` | `"System update tonight"` | `None` | System notification created | None |
-| NOTIF-03 | Valid user | Invalid type | `"Alert"` | `"Test notification"` | `None` | Notification type error | Existing user |
-| NOTIF-04 | Valid user | Valid type | `""` | `"Notification body"` | `None` | Title validation error | Existing user |
-| NOTIF-05 | Valid user | Valid type | `"Reminder"` | `""` | `None` | Body validation error | Existing user |
-| NOTIF-06 | Valid user | Valid type | `"Status update"` | Very long message | Valid report | Notification created | Existing user and report |
-| NOTIF-07 | Invalid user | Valid type | `"Warning"` | `"Unauthorized access"` | `None` | User validation error | None |
+| NOTIF-01 | Valid user | Valid type | `"Report updated"` | `"Your report status changed"` | Valid report | Notification created successfully | Existing user and report |
+| NOTIF-02 | `None` | System type | `"Maintenance notice"` | `"System update tonight"` | `None` | System notification created successfully | None |
+| NOTIF-03 | Valid user | Invalid type | `"Alert"` | `"Test notification"` | `None` | Invalid notification type | Existing user |
+| NOTIF-04 | Valid user | Valid type | `""` | `"Notification body"` | `None` | Empty notification title | Existing user |
+| NOTIF-05 | Valid user | Valid type | `"Reminder"` | `""` | `None` | Empty notification body | Existing user |
+| NOTIF-06 | Valid user | Valid type | `"Status update"` | Very long message | Valid report | Notification created successfully | Existing user and report |
+| NOTIF-07 | Invalid user | Valid type | `"Warning"` | `"Unauthorized access"` | `None` | Invalid user account | None |validation error | None |
 
 ## 10 `participium.services.user_service.UserService.update_profile`
 

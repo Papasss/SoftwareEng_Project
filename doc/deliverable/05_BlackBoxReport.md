@@ -138,13 +138,13 @@ Prototype: send_message(report: Report, sender: User, body: str) -> Message
 
 | TC-ID | report | sender | body | Expected | Fixture |
 |:------|:--------|:--------|:------|:----------|:---------|
-| MSG-01 | Valid report | Valid user | "Issue still unresolved" | Message created | Existing report and authorized user |
-| MSG-02 | Valid report | Valid user | "" | Validation error | Existing report and authorized user |
-| MSG-03 | Closed report | Valid user | "Need update" | Operation not allowed | Existing closed report |
+| MSG-01 | Valid report | Valid user | "Issue still unresolved" | Message sent successfully | Existing report and authorized user |
+| MSG-02 | Valid report | Valid user | "" | Empty message error | Existing report and authorized user |
+| MSG-03 | Closed report | Valid user | "Need update" | Messaging not allowed for closed report | Existing closed report |
 | MSG-04 | Invalid report | Valid user | "Any update?" | Report not found | Existing user |
-| MSG-05 | Valid report | Unauthorized user | "Checking status" | Authorization error | Existing report and unauthorized user |
-| MSG-06 | Valid report | Valid user | Very long message | Message created | Existing report and authorized user |
-| MSG-07 | Valid report | None | "Test message" | Authentication error | Existing report |
+| MSG-05 | Valid report | Unauthorized user | "Checking status" | User authorization required | Existing report and unauthorized user |
+| MSG-06 | Valid report | Valid user | Very long message | Message sent successfully | Existing report and authorized user |
+| MSG-07 | Valid report | None | "Test message" | User authentication required | Existing report |
 
 ## 8 `participium.core.security.verify_password`
 

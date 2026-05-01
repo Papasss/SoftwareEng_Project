@@ -14,9 +14,14 @@ Suggested test file: `test_parse_date.py`
 
 Prototype: `parse_date(value: str | None) -> datetime | None`
 
+
 | TC-ID | value | Expected | Fixture |
-| :---- | :---- | :------- | :------ |
-|  |  |  |  |
+|:------|:------|:----------|:---------|
+| DATE-01 | `"2025-05-01"` | Valid datetime | None |
+| DATE-02 | `None` | None returned | None |
+| DATE-03 | `"invalid-date"` | ValueError | None |
+| DATE-04 | `""` | ValueError | None |
+| DATE-05 | `"2025/05/01"` | Invalid format error | None |
 
 ## 3 `participium.core.status_flow.ensure_transition_allowed`
 

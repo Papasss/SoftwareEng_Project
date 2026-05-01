@@ -77,8 +77,16 @@ Suggested test file: `test_public_reports.py`
 Prototype: `list_public_reports(category_id: int | None = None, status: ReportStatus | None = None, date_from: datetime | None = None, date_to: datetime | None = None, sort: str = "desc") -> list[Report]`
 
 | TC-ID | category_id | status | date_from | date_to | sort | Expected | Fixture |
-| :---- | :---------- | :----- | :-------- | :------ | :--- | :------- | :------ |
-|  |  |  |  |  |  |  |  |
+|:------|:-------------|:--------|:------------|:----------|:------|:----------|:---------|
+| LIST-01 | `None` | `None` | `None` | `None` | `"desc"` | All public reports | Existing public reports |
+| LIST-02 | Valid category | `None` | `None` | `None` | `"desc"` | Filtered reports | Existing category and reports |
+| LIST-03 | `None` | `Resolved` | `None` | `None` | `"desc"` | Resolved reports only | Existing resolved reports |
+| LIST-04 | `None` | `None` | Valid start date | Valid end date | `"desc"` | Reports in date range | Existing dated reports |
+| LIST-05 | `None` | `None` | `None` | `None` | `"asc"` | Ascending sorted reports | Existing public reports |
+| LIST-06 | Invalid category | `None` | `None` | `None` | `"desc"` | Empty result or error | None |
+| LIST-07 | `None` | Invalid status | `None` | `None` | `"desc"` | Validation error | None |
+| LIST-08 | `None` | `None` | Future date | Past date | `"desc"` | Invalid date range | None |
+| LIST-09 | `None` | `None` | `None` | `None` | Invalid sort value | Validation error | Existing public reports |
 
 
 ## 7 `participium.services.messaging_service.MessagingService.send_message`

@@ -115,15 +115,23 @@ Prototype: `verify_password(password: str, password_hash: str) -> bool`
 | :---- | :------- | :------------ | :------- | :------ |
 |  |  |  |  |  |
 
+
+
 ## 9 `participium.services.notification_service.NotificationService.create_notification`
 
 Suggested test file: `test_create_notification.py`
 
-Prototype: `create_notification(user: User | None, notification_type: NotificationType, title: str, body: str, report: Report | None = None) -> Notification | None`
+Prototype: `create_notification(user: User | None, notification_type: str, title: str, body: str, report: Report | None = None) -> Notification`
 
 | TC-ID | user | notification_type | title | body | report | Expected | Fixture |
-| :---- | :--- | :---------------- | :---- | :--- | :----- | :------- | :------ |
-|  |  |  |  |  |  |  |  |
+|:------|:------|:------------------|:------|:------|:--------|:----------|:---------|
+| NOTIF-01 | Valid user | Valid type | `"Report updated"` | `"Your report status changed"` | Valid report | Notification created | Existing user and report |
+| NOTIF-02 | `None` | System type | `"Maintenance notice"` | `"System update tonight"` | `None` | System notification created | None |
+| NOTIF-03 | Valid user | Invalid type | `"Alert"` | `"Test notification"` | `None` | Notification type error | Existing user |
+| NOTIF-04 | Valid user | Valid type | `""` | `"Notification body"` | `None` | Title validation error | Existing user |
+| NOTIF-05 | Valid user | Valid type | `"Reminder"` | `""` | `None` | Body validation error | Existing user |
+| NOTIF-06 | Valid user | Valid type | `"Status update"` | Very long message | Valid report | Notification created | Existing user and report |
+| NOTIF-07 | Invalid user | Valid type | `"Warning"` | `"Unauthorized access"` | `None` | User validation error | None |
 
 ## 10 `participium.services.user_service.UserService.update_profile`
 

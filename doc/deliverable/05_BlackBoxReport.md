@@ -37,9 +37,45 @@ Allowed transitions:
 `Rejected -> Rejected`;
 `Resolved -> Resolved`.
 
-| TC-ID | current_status | next_status | Expected | Fixture |
-| :---- | :------------- | :---------- | :------- | :------ |
-|  |  |  |  |  |
+| TC-ID  | current_status   | next_status       | Expected        | Fixture |
+| :----  | :-------------   | :----------       | :-------------- | :------ |
+|  3.1.1 | PENDING_APPROVAL | PENDING_APPROVAL  | True            | None    |
+|  3.1.2 | PENDING_APPROVAL | ASSIGNED          | True            | None    |
+|  3.1.3 | PENDING_APPROVAL | REJECTED          | True            | None    |
+|  3.1.4 | PENDING_APPROVAL | RESOLVED          | ValidationError | None    |
+|  3.1.5 | PENDING_APPROVAL | IN_PROGRESS       | ValidationError | None    |
+|  3.1.6 | PENDING_APPROVAL | SUSPENDED         | ValidationError | None    |
+|  3.2.1 | ASSIGNED         | ASSIGNED          | True            | None    |
+|  3.2.2 | ASSIGNED         | IN_PROGRESS       | True            | None    |
+|  3.2.3 | ASSIGNED         | SUSPENDED         | True            | None    |
+|  3.2.4 | ASSIGNED         | RESOLVED          | True            | None    |
+|  3.2.5 | ASSIGNED         | PENDING_APPROVAL  | ValidationError | None    |
+|  3.2.6 | ASSIGNED         | REJECTED          | ValidationError | None    |
+|  3.3.1 | IN_PROGRESS      | IN_PROGRESS       | True            | None    |
+|  3.3.2 | IN_PROGRESS      | SUSPENDED         | True            | None    |
+|  3.3.3 | IN_PROGRESS      | RESOLVED          | True            | None    |
+|  3.3.4 | IN_PROGRESS      | ASSIGNED          | ValidationError | None    |
+|  3.3.5 | IN_PROGRESS      | PENDING_APPROVAL  | ValidationError | None    |
+|  3.3.6 | IN_PROGRESS      | REJECTED          | ValidationError | None    |
+|  3.4.1 | SUSPENDED        | IN_PROGRESS       | True            | None    |
+|  3.4.2 | SUSPENDED        | SUSPENDED         | True            | None    |
+|  3.4.3 | SUSPENDED        | RESOLVED          | True            | None    |
+|  3.4.4 | SUSPENDED        | ASSIGNED          | ValidationError | None    |
+|  3.4.5 | SUSPENDED        | PENDING_APPROVAL  | ValidationError | None    |
+|  3.4.6 | SUSPENDED        | REJECTED          | ValidationError | None    |
+|  3.5.1 | REJECTED         | REJECTED          | True            | None    |
+|  3.5.2 | REJECTED         | SUSPENDED         | ValidationError | None    |
+|  3.5.3 | REJECTED         | RESOLVED          | ValidationError | None    |
+|  3.5.4 | REJECTED         | ASSIGNED          | ValidationError | None    |
+|  3.5.5 | REJECTED         | PENDING_APPROVAL  | ValidationError | None    |
+|  3.5.6 | REJECTED         | IN_PROGRESS       | ValidationError | None    |
+|  3.6.1 | RESOLVED         | RESOLVED          | True            | None    |
+|  3.6.2 | RESOLVED         | SUSPENDED         | ValidationError | None    |
+|  3.6.3 | RESOLVED         | REJECTED          | ValidationError | None    |
+|  3.6.4 | RESOLVED         | ASSIGNED          | ValidationError | None    |
+|  3.6.5 | RESOLVED         | PENDING_APPROVAL  | ValidationError | None    |
+|  3.6.6 | RESOLVED         | IN_PROGRESS       | ValidationError | None    |
+|  3.7.1 | PENDING_APPROVAL | NEW_STATUS        | ValidationError | None    |
 
 ## 4 participium.services.report_service.ReportService.create_report
 
@@ -66,9 +102,15 @@ Suggested test file: `test_update_status.py`
 
 Prototype: `update_status(report_id: int, operator: User, next_status_value: str, note: str | None = None) -> Report`
 
-| TC-ID | report_id | operator | next_status_value | note | Expected | Fixture |
-| :---- | :-------- | :------- | :---------------- | :--- | :------- | :------ |
-|  |  |  |  |  |  |  |
+| TC-ID | report_id | operator  | next_status_value | note | Expected              | Fixture      |
+| :---- | :-------- | :-------- | :---------------- | :--- | :-------------------- | :------------|
+| 5.1   |  201      |  Citizen  |  Assigned         | None | AuthorizationError    | User, Report |
+| 5.2   |  201      |  Admin    |  Assigned         | None | AuthorizationError    | User, Report |
+| 5.3   |  201      |  Operator |  Assigned         | None | NotFoundError         | User, Report |
+| 5.4   |  201      |  Operator |  Invalid Status   | None | ValidationError       | User, Report |
+| 5.5   |  201      |  Operator |  Rejected         | None | ValidationError       | User, Report |
+| 5.6   |  201      |  Operator |  Resolved         | None | ValidationError       | User, Report |
+| 5.7   |  201      |  Operator |  Rejected         | The problem no longer exists. | ReportStatus.REJECTED | User, Report |
 
 ## 6 `participium.services.report_service.ReportService.list_public_reports`
 

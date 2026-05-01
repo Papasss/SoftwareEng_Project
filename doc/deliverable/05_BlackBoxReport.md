@@ -85,17 +85,15 @@ Prototype: create_report(reporter: User, category_id: int | str | None, title: s
 
 | TC-ID | reporter | category_id | title | description | latitude | longitude | photos | is_anonymous | Expected | Fixture |
 |:------|:----------|:-------------|:------|:-------------|:----------|:-----------|:--------|:---------------|:----------|:---------|
-| REPORT-01 | Valid user | Valid category | "Broken streetlight" | "Light not working" | 45.0703 | 7.6869 | Valid image list | False | Report created | Existing user and category |
-| REPORT-02 | Valid user | Valid category | "Road damage" | "Large pothole" | 45.0703 | 7.6869 | [] | False | Report created | Existing user and category |
-| REPORT-03 | Valid user | Invalid category | "Garbage issue" | "Overflowing bins" | 45.0703 | 7.6869 | [] | False | Category error | Existing user |
-| REPORT-04 | Valid user | Valid category | "" | "Description" | 45.0703 | 7.6869 | [] | False | Validation error | Existing user and category |
-| REPORT-05 | Valid user | Valid category | "Water leakage" | "" | 45.0703 | 7.6869 | [] | False | Validation error | Existing user and category |
-| REPORT-06 | Valid user | Valid category | "Traffic issue" | "Heavy blockage" | 999 | 7.6869 | [] | False | Invalid coordinates | Existing user and category |
-| REPORT-07 | None | Valid category | "Street issue" | "Street blocked" | 45.0703 | 7.6869 | [] | False | Authentication error | Existing category |
-| REPORT-08 | Valid user | Valid category | "Illegal dumping" | "Waste near road" | 45.0703 | 7.6869 | Invalid file type | False | File validation error | Existing user and category |
-| REPORT-09 | Valid user | Valid category | "Noise complaint" | "Construction noise" | 45.0703 | 7.6869 | Valid image list | True | Anonymous report created | Existing user and category |
-| REPORT-10 | Valid user | Valid category | Very long title | "Description" | 45.0703 | 7.6869 | [] | False | Validation error | Existing user and category |
-
+| REPORT-01 | Valid user | Valid category | "Broken streetlight" | "Light not working" | 45.0703 | 7.6869 | Valid image list | False | Report created successfully | Existing user and category |
+| REPORT-02 | Valid user | Valid category | "Road damage" | "Large pothole" | 45.0703 | 7.6869 | [] | False | Report created without photos | Existing user and category |
+| REPORT-03 | Valid user | Invalid category | "Garbage issue" | "Overflowing bins" | 45.0703 | 7.6869 | [] | False | Invalid category ID | Existing user |
+| REPORT-04 | Valid user | Valid category | "" | "Description" | 45.0703 | 7.6869 | [] | False | Empty title error | Existing user and category |
+| REPORT-05 | Valid user | Valid category | "Water leakage" | "" | 45.0703 | 7.6869 | [] | False | Empty description error | Existing user and category |
+| REPORT-06 | Valid user | Valid category | "Traffic issue" | "Heavy blockage" | 999 | 7.6869 | [] | False | Invalid latitude value | Existing user and category |
+| REPORT-07 | None | Valid category | "Street issue" | "Street blocked" | 45.0703 | 7.6869 | [] | False | User authentication required | Existing category |
+| REPORT-08 | Valid user | Valid category | "Illegal dumping" | "Waste near road" | 45.0703 | 7.6869 | Invalid file type | False | Unsupported file format | Existing user and category |
+| REPORT-09 | Valid user | Valid category | "Noise complaint" | "Construction noise" | 45.0703 | 7.6869 | Valid image list | True | Anonymous report created successfully | Existing user and category |
 ## 5 `participium.services.report_service.ReportService.update_status`
 
 Suggested test file: `test_update_status.py`

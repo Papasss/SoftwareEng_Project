@@ -1,8 +1,8 @@
 # Participium - Project Repository
 
 **System description (entry point):**
-- **[Participium.md](doc/Participium.md)** — definitive system description (EN)
-- **[Participium_it.md](doc/Participium_it.md)** — Italian version (IT)
+- **[Participium.md](doc/Participium.md)** ? definitive system description (EN)
+- **[Participium_it.md](doc/Participium_it.md)** ? Italian version (IT)
 
 ---
 

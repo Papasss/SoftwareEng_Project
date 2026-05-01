@@ -89,15 +89,21 @@ Prototype: `list_public_reports(category_id: int | None = None, status: ReportSt
 | LIST-09 | `None` | `None` | `None` | `None` | Invalid sort value | Validation error | Existing public reports |
 
 
-## 7 `participium.services.messaging_service.MessagingService.send_message`
+## 7 participium.services.messaging_service.MessagingService.send_message
 
-Suggested test file: `test_send_message.py`
+Suggested test file: test_send_message.py
 
-Prototype: `send_message(report: Report, sender: User, body: str) -> Message`
+Prototype: send_message(report: Report, sender: User, body: str) -> Message
 
 | TC-ID | report | sender | body | Expected | Fixture |
-| :---- | :----- | :----- | :--- | :------- | :------ |
-|  |  |  |  |  |  |
+|:------|:--------|:--------|:------|:----------|:---------|
+| MSG-01 | Valid report | Valid user | "Issue still unresolved" | Message created | Existing report and authorized user |
+| MSG-02 | Valid report | Valid user | "" | Validation error | Existing report and authorized user |
+| MSG-03 | Closed report | Valid user | "Need update" | Operation not allowed | Existing closed report |
+| MSG-04 | Invalid report | Valid user | "Any update?" | Report not found | Existing user |
+| MSG-05 | Valid report | Unauthorized user | "Checking status" | Authorization error | Existing report and unauthorized user |
+| MSG-06 | Valid report | Valid user | Very long message | Message created | Existing report and authorized user |
+| MSG-07 | Valid report | None | "Test message" | Authentication error | Existing report |
 
 ## 8 `participium.core.security.verify_password`
 

@@ -40,8 +40,8 @@ CITIZEN_USER = User(
 
 report = Report(
     id=201,
-    title="Buco in strada",
-    description="C'è un buco profondo in mezzo alla strada.",
+    title="There is a hole in the street",
+    description="The hole is about 1 meter wide and 50 cm deep, located near the intersection of Main St and 2nd Ave.",
     latitude=45.4642,
     longitude=9.1900,
     status=ReportStatus.PENDING_APPROVAL,

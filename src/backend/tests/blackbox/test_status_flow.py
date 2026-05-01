@@ -7,6 +7,18 @@ from participium.models.enums import ReportStatus
 import pytest
 
 
+# WRONG INPUT VALUE
+@pytest.mark.skip(reason="Disabled.")
+@pytest.mark.parametrize("next_state", [
+    ReportStatus.NEW_STATUS
+])
+def test_verify_pending_status_success(next_state) -> None:
+    current_state = ReportStatus.PENDING_APPROVAL
+
+    with pytest.raises(ValidationError):
+        ensure_transition_allowed(current_state, next_state)
+
+
 # PENDING APPROVAL
 @pytest.mark.skip(reason="Disabled.")
 @pytest.mark.parametrize("next_state", [

@@ -2,7 +2,7 @@
 
 ### Control Flow Graph
 
- ![](../data/img/report_service_control_flow.png)
+ - `![](../data/img/report_service_control_flow.png)`
 
 ### Atomic Conditions
 

@@ -198,4 +198,12 @@ Prototype: `update_profile(user: User, username: str | None = None, first_name: 
 
 | TC-ID | user | username | first_name | last_name | email_notifications_enabled | profile_picture | Expected | Fixture |
 | :---- | :--- | :------- | :--------- | :-------- | :-------------------------- | :-------------- | :------- | :------ |
-|  |  |  |  |  |  |  |  |  |
+| UPD-01 | Valid user | New username | None | None | None | None | Username updated | Existing user |
+| UPD-02 | Valid user | None | New first name | None | None | None | First name updated |
+| UPD-03 | Valid user | None | None | New last name | None | None | Last name updated | Existing user |
+| UPD-04 | Valid user | None | None | None | New binary value | None | Notification preference updated | Existing user |
+| UPD-05 | Valid user | None | None | None | None | Valid image file | Profile picture updated | Existing user |
+| UPD-06 | Valid user | None | None | None | None | Invalid image file | File validation error | Existing user |
+| UPD-07 | Valid user | None | None | None | None | None | Update with identical data | Existing user |
+| UPD-08 | Valid user | New username | New first name | New last name | New binary value | New valid image file | Multiple fields updated | Existing user |
+| UPD-09 | Invalid user | New username | None | None | None | None | Authentication erroe | None |

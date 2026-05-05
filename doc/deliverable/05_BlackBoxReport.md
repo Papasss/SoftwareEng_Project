@@ -162,9 +162,15 @@ Suggested test file: `test_verify_password.py`
 
 Prototype: `verify_password(password: str, password_hash: str) -> bool`
 
-| TC-ID | password | password_hash | Expected | Fixture |
-| :---- | :------- | :------------ | :------- | :------ |
-|  |  |  |  |  |
+| TC-ID  | password           | password_hash          | Expected | Fixture          |
+| :----- | :----------------- | :--------------------- | :------- | :--------------- |
+| PSW-01 | Correct password   | Matching valid hash    | True     | Precomputed hash |
+| PSW-02 | Incorrect password | Valid hash             | False    | Precomputed hash |
+| PSW-03 | ""                 | Valid hash             | False    | Precomputed hash |
+| PSW-04 | Correct password   | Invalid/corrupted hash | False    | None             |
+| PSW-05 | Incorrect password | Invalid/corrupted hash | False    | None             |
+| PSW-06 | ""                 | Invalid/corrupted hash | False    | None             |
+
 
 
 

@@ -4,9 +4,19 @@ Suggested test file: `test_authenticate.py`
 
 Prototype: `authenticate(identifier: str, password: str) -> User`
 
-| TC-ID | identifier | password | Expected | Fixture |
-| :---- | :--------- | :------- | :------- | :------ |
-|  |  |  |  |  |
+| TC-ID   | identifier       | password           | Expected                  | Fixture       |
+| :------ | :--------------- | :----------------- | :------------------------ | :------------ |
+| AUTH-01 | Valid username   | Correct password   | User returned succesfully | Existing user |
+| AUTH-02 | Valid email      | Correct password   | User returned succesfully | Existing user |
+| AUTH-03 | Valid username   | Incorrect password | AuthenticationError       | Existing user |
+| AUTH-04 | Valid email      | Incorrect password | AuthenticationError       | Existing user |
+| AUTH-05 | Invalid username | Any password       | AuthenticationError       | None          |
+| AUTH-06 | Invalid email    | Any password       | AuthenticationError       | None          |
+| AUTH-07 | ""               | Any password       | ValidationError           | None          |
+| AUTH-08 | Valid username   | ""                 | ValidationError           | Existing user |
+| AUTH-09 | Valid email      | ""                 | ValidationError           | Existing user |
+| AUTH-10 | ""               | ""                 | ValidationError           | None          |
+| AUTH-11 | Inactive user    | Correct password   | AuthorizationError        | Inactive user |
 
 ## 2 `participium.core.utils.parse_date`
 

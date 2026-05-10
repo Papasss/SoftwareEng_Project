@@ -274,7 +274,7 @@ def test_create_report_persists_report_photo_and_status_history(
 
     report_repository.add.side_effect = capture_add
     session.flush.side_effect = lambda: setattr(added_reports[0], "id", 42)
-    storage_service.save.side_effect = ["/tmp/photo1.jpg", "/tmp/photo2.jpg"]
+    storage_service.save.side_effect = ["/photo1.jpg", "/photo2.jpg"]
     returned_report = Report(id=42, title="Loaded report")
     service.get_report = Mock(return_value=returned_report)
 
@@ -312,7 +312,7 @@ def test_create_report_persists_report_photo_and_status_history(
     added_photo_args = [args[0] for args, _ in report_repository.add_photo.call_args_list]
     assert all(isinstance(photo, ReportPhoto) for photo in added_photo_args)
     assert [photo.report_id for photo in added_photo_args] == [42, 42]
-    assert [photo.file_path for photo in added_photo_args] == ["/tmp/photo1.jpg", "/tmp/photo2.jpg"]
+    assert [photo.file_path for photo in added_photo_args] == ["/photo1.jpg", "/photo2.jpg"]
     assert [photo.original_filename for photo in added_photo_args] == ["first.jpg", "second.jpg"]
 
     assert report_repository.add_status_entry.call_count == 1

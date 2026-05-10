@@ -26,7 +26,8 @@
 
 ### Structural Lower Bound
 
-  $V(G) = \pi + 1$ = 11 + 1 = 12  
+  The formula involves adding +1 to the decisional nodes
+  $V(G) = \pi + 1$ = 8 + 1 = 9  
 
 ### Node Coverage
 
@@ -77,9 +78,29 @@
 
 ### Loop Coverage
 
+ - reachable coverage: 100%
+ - minimum number of test case: 4
+ - test cases: 
+      - TC1(valid_photos: []; "At least one photo is required.")
+      - TC2(valid_photos: [FileStorage(filename="photo1.jpg")]; Success)
+      - TC3(valid_photos: [FileStorage(filename="photo1.jpg"), FileStorage(filename="photo2.jpg"), FileStorage(filename="photo3.jpg")]; Success)   --> limit case
+      - TC4(valid_photos: [FileStorage(filename="photo1.jpg"), FileStorage(filename="photo2.jpg"), FileStorage(filename="photo3.jpg"), FileStorage(filename="photo4.jpg")]; "A report can contain at most 3 photos.")
+
 ### Path Coverage
 
+ - reachable coverage: unfeasible
+ - minimum number of test case: 5 + 3^N
+ - test cases: The loop condition for the possible photos occurs before the condition “if len(valid_photos) > 3”, resulting in potentially infinite paths 
+
 ### Minimal Suite Test
+
+ - `test_create_report_raises_when_category_id_is_malformed`
+ - `test_create_report_raises_when_category_is_inactive`
+ - `test_create_report_raises_when_title_or_description_is_missing`
+ - `test_create_report_raises_when_coordinates_are_missing`
+ - `test_create_report_raises_when_coordinates_are_not_numeric`
+ - `test_create_report_raises_when_more_than_three_photos_are_provided`
+ - `test_create_report_persists_report_photo_and_status_history`
 
 ## 2 `MessagingService._resolve_recipient`
 

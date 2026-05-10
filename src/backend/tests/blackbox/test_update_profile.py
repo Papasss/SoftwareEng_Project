@@ -80,3 +80,5 @@ def test_verify_update_profile_full_success() -> None:
     assert updated_user.last_name == "Nullazzo"
     assert updated_user.email_notifications_enabled is False
     assert updated_user.profile_picture == photo_storage
+    assert updated_user.category_id == 1
+    assert updated_user.is_active == True

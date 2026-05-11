@@ -126,7 +126,7 @@ def test_update_user_converts_boolean_fields_to_bool(
     value: object,
     expected: bool,
 ) -> None:
-    """Verifica che i campi booleani vengono convertiti a bool."""
+
     service = user_service_bundle["service"]
     user_repository = user_service_bundle["user_repository"]
     service.get_user.return_value = reporter
@@ -218,7 +218,7 @@ def test_update_user_complete_update_all_fields(
     user_service_bundle: dict[str, object],
     reporter: User,
 ) -> None:
-    """Verifica un update completo di tutti i campi modificabili per l'utente 105."""
+
     service = user_service_bundle["service"]
     user_repository = user_service_bundle["user_repository"]
     session = user_service_bundle["session"]

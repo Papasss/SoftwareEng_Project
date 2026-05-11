@@ -89,7 +89,7 @@
 ### Path Coverage
 
  - reachable coverage: unfeasible
- - minimum number of test case: 5 + 3^N
+ - minimum number of test case: 5 + $3^n$
  - test cases: The loop condition for the possible photos occurs before the condition “if len(valid_photos) > 3”, resulting in potentially infinite paths 
 
 ### Minimal Suite Test
@@ -174,15 +174,49 @@
 
 ### Control Flow Graph
 
-- ![](../data/img/xxx.xxx)
+ - `![](../data/img/update_user_control_flow.png)`
 
 ### Atomic Conditions
 
+  1) Checking username is not None
+  2) Checkin username is equal to the one gets by his id
+  3) Checking username is not None gets from the user repository
+  4) Checking email is not None
+  5) Checking email is equal to the one gets by his id
+  6) Checking email is not None gets from the user repository
+  7) Checking fields are not None
+  8) Checking value is a String type
+  9) Checking category_id is in payload
+  10) Checking role is not None
+  11) Checking category_id is not None
+  12) Checking is_active is not None
+  13) Checkin email_notifications_enabled is not None
+  14) Commit changes
+
 ### Structural Lower Bound
+
+  The formula involves adding +1 to the decisional nodes
+  $V(G) = \pi + 1$ = 11 + 1 = 12  
 
 ### Node Coverage
 
+ - reachable coverage: 100%
+ - minimum number of test case: 3
+ - test cases: 
+      - TC1({username: "username_already_used"}; "Username already in use.")
+      - TC2({email: "email_already_used@gmail.com"}; "Email already in use.")    
+      - TC3({first_name: "Gianluca"}; return User)
+
 ### Edge Coverage
+
+ - reachable coverage: 100%
+ - minimum number of test case: 5
+ - test cases: 
+      - TC1({username: "username_already_used"}; "Username already in use.")
+      - TC2({email: "email_already_used@gmail.com"}; "Email already in use.")    
+      - TC3({}; return User)
+      - TC4({"username": "new_user", "first_name": "  Mario  ", "role": "ADMIN", "category_id": 5, "is_active": True, "email_notifications_enabled": True}; return User)
+      - TC5({"last_name": 12345, "category_id": 999}; return User)
 
 ### Condition Coverage
 
@@ -192,3 +226,8 @@
 
 ### Minimal Suite Test
 
+ - `test_update_user_raises_validation_error_when_username_already_in_use`
+ - `test_update_user_raises_validation_error_when_email_already_in_use`
+ - `test_update_user_converts_boolean_fields_to_bool`
+ - `test_update_user_resolves_category_when_category_id_in_payload`
+ - `test_update_user_complete_update_all_fields`

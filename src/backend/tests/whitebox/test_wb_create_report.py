@@ -77,13 +77,14 @@ def test_create_report_raises_when_category_id_is_malformed(
 
 def test_create_report_raises_when_category_is_missing(
     report_service_bundle: dict[str, object],
+    reporter: User,
 ) -> None:
     service = report_service_bundle["service"]
     report_service_bundle["category_repository"].get_by_id.return_value = None
 
     with pytest.raises(ValidationError, match="A valid active category is required\."):
         service.create_report(
-            reporter=User(id=1),
+            reporter=reporter,
             category_id=999,
             title="Title",
             description="Description",
@@ -98,17 +99,15 @@ def test_create_report_raises_when_category_is_missing(
 
 def test_create_report_raises_when_category_is_inactive(
     report_service_bundle: dict[str, object],
+    reporter: User,
+    active_category: Category,
 ) -> None:
     service = report_service_bundle["service"]
-    report_service_bundle["category_repository"].get_by_id.return_value = Category(
-        id=5,
-        name="Road",
-        is_active=False,
-    )
+    report_service_bundle["category_repository"].get_by_id.return_value = active_category
 
     with pytest.raises(ValidationError, match="A valid active category is required\."):
         service.create_report(
-            reporter=User(id=1),
+            reporter=reporter,
             category_id=5,
             title="Title",
             description="Description",
@@ -132,6 +131,7 @@ def test_create_report_raises_when_category_is_inactive(
 )
 def test_create_report_raises_when_title_or_description_is_missing(
     report_service_bundle: dict[str, object],
+    reporter: User,
     active_category: Category,
     title: str | None,
     description: str | None,
@@ -141,7 +141,7 @@ def test_create_report_raises_when_title_or_description_is_missing(
 
     with pytest.raises(ValidationError, match="Title and description are required\."):
         service.create_report(
-            reporter=User(id=1),
+            reporter=reporter,
             category_id=5,
             title=title,
             description=description,
@@ -164,6 +164,7 @@ def test_create_report_raises_when_title_or_description_is_missing(
 )
 def test_create_report_raises_when_coordinates_are_missing(
     report_service_bundle: dict[str, object],
+    reporter: User,
     active_category: Category,
     latitude: float | None,
     longitude: float | None,
@@ -173,7 +174,7 @@ def test_create_report_raises_when_coordinates_are_missing(
 
     with pytest.raises(ValidationError, match="Latitude and longitude are required\."):
         service.create_report(
-            reporter=User(id=1),
+            reporter=reporter,
             category_id=5,
             title="Title",
             description="Description",
@@ -188,6 +189,7 @@ def test_create_report_raises_when_coordinates_are_missing(
 
 def test_create_report_raises_when_coordinates_are_not_numeric(
     report_service_bundle: dict[str, object],
+    reporter: User,
     active_category: Category,
 ) -> None:
     service = report_service_bundle["service"]
@@ -195,7 +197,7 @@ def test_create_report_raises_when_coordinates_are_not_numeric(
 
     with pytest.raises(ValidationError, match="Latitude and longitude must be valid numbers\."):
         service.create_report(
-            reporter=User(id=1),
+            reporter=reporter,
             category_id=5,
             title="Title",
             description="Description",
@@ -210,6 +212,7 @@ def test_create_report_raises_when_coordinates_are_not_numeric(
 
 def test_create_report_raises_when_no_valid_photos_are_provided(
     report_service_bundle: dict[str, object],
+    reporter: User,
     active_category: Category,
 ) -> None:
     service = report_service_bundle["service"]
@@ -217,7 +220,7 @@ def test_create_report_raises_when_no_valid_photos_are_provided(
 
     with pytest.raises(ValidationError, match="At least one photo is required\."):
         service.create_report(
-            reporter=User(id=1),
+            reporter=reporter,
             category_id=5,
             title="Title",
             description="Description",
@@ -232,6 +235,7 @@ def test_create_report_raises_when_no_valid_photos_are_provided(
 
 def test_create_report_raises_when_more_than_three_photos_are_provided(
     report_service_bundle: dict[str, object],
+    reporter: User,
     active_category: Category,
 ) -> None:
     service = report_service_bundle["service"]
@@ -241,7 +245,7 @@ def test_create_report_raises_when_more_than_three_photos_are_provided(
 
     with pytest.raises(ValidationError, match="A report can contain at most 3 photos\."):
         service.create_report(
-            reporter=User(id=1),
+            reporter=reporter,
             category_id=5,
             title="Title",
             description="Description",
@@ -275,23 +279,22 @@ def test_create_report_persists_report_photo_and_status_history(
     report_repository.add.side_effect = capture_add
     session.flush.side_effect = lambda: setattr(added_reports[0], "id", 42)
     storage_service.save.side_effect = ["/photo1.jpg", "/photo2.jpg"]
-    returned_report = Report(id=42, title="Loaded report")
-    service.get_report = Mock(return_value=returned_report)
+    service.get_report = Mock(side_effect=lambda report_id: added_reports[0] if report_id == 42 and added_reports else None)
 
     photos = [_photo("first.jpg"), _photo("second.jpg"), _photo("")]
 
     result = service.create_report(
         reporter=reporter,
-        category_id="5",
+        category_id=5,
         title="  New title  ",
         description="  Detailed description  ",
-        latitude="12.34",
-        longitude="56.78",
+        latitude=12.34,
+        longitude=56.78,
         photos=photos,
-        is_anonymous=1,
+        is_anonymous=True,
     )
 
-    assert result is returned_report
+    assert result is added_reports[0]
     assert len(added_reports) == 1
 
     created_report = added_reports[0]

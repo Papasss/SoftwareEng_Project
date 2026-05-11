@@ -89,7 +89,7 @@
 ### Path Coverage
 
  - reachable coverage: unfeasible
- - minimum number of test case: 5 + $3^n$
+ - minimum number of test case: 5 + 3$^n$
  - test cases: The loop condition for the possible photos occurs before the condition “if len(valid_photos) > 3”, resulting in potentially infinite paths 
 
 ### Minimal Suite Test
@@ -220,9 +220,30 @@
 
 ### Condition Coverage
 
+ - reachable coverage: 100%
+ - minimum number of test case: 5
+ - test cases: 
+      - TC1({username: "username_already_used"}; "Username already in use.")    --> Precondition('get_by_username' return an User) 
+      - TC2({email: "email_already_used@gmail.com"}; "Email already in use.")    --> Precondition('get_by_email' return an User) 
+      - TC3({username: "old_user", email: "old_user@gmail.com", category_id: 5}; return User)
+      - TC4({username: "new_user", email: "new_user@gmail.com"}; return User)    --> Precondition('get_by_email' and 'get_by_username' return None)    
+      - TC5({username: "", email: "", "role": "admin"}; return User)
+
 ### Loop Coverage
 
+ - reachable coverage: 100%
+ - minimum number of test case: 4
+ - test cases: 
+      - TC1({role: "admin"}; return User) 
+      - TC2({first_name: "Giuseppe"}; return User)
+      - TC3({first_name: "Giuseppe", last_name: "Delli"}; return User)
+      - TC4({first_name: "Giuseppe", last_name: "Delli", username: "gdl7", email: "giuseppe.delli@hotmail.com"}; return User)
+
 ### Path Coverage
+
+ - reachable coverage: unfeasible
+ - minimum number of test case: 2 + (3$^4$ * 2 * 3 * 2 * 2) = 1946
+ - test cases: The loop condition for each field is limited at max 4 different fields, so the explosion of necessary path is limited at least 1946. The first 2 paths added represent the ValidationError paths.
 
 ### Minimal Suite Test
 

@@ -208,24 +208,75 @@ All independent execution paths of the function are covered.
 
 ### Control Flow Graph
 
-- ![](../data/img/xxx.xxx)
+- `![](../data/img/count_unread_message_notifications_by_report_control_flow.png)`
 
 ### Atomic Conditions
 
+1) Checking notification.report_id is None
+2) Checking report_id already exists in counts dictionary
+
 ### Structural Lower Bound
+
+The formula involves adding +1 to the decisional nodes.
+V(G) = π + 1 = 2 + 1 = 3
 
 ### Node Coverage
 
+- reachable coverage: 100%
+- minimum number of test case: 4
+- test cases:
+    - TC1(empty notifications list → returns empty dictionary)
+    - TC2(notification.report_id is None → continue branch executed)
+    - TC3(valid report_id first occurrence → count initialized)
+    - TC4(duplicate report_id found → count incremented)
+
 ### Edge Coverage
+
+- reachable coverage: 100%
+- minimum number of test case: 4
+- test cases:
+    - TC1(loop not entered → returns empty dictionary)
+    - TC2(notification.report_id is None → TRUE branch executed)
+    - TC3(notification.report_id valid → FALSE branch executed and count initialized)
+    - TC4(existing report_id encountered again → count increment branch executed)
 
 ### Condition Coverage
 
+- reachable coverage: 100%
+- minimum number of test case: 4
+- test cases:
+    - TC1(notification.report_id is None → TRUE condition)
+    - TC2(notification.report_id is not None → FALSE condition)
+    - TC3(report_id not already in counts dictionary → initializes count)
+    - TC4(report_id already exists in counts dictionary → increments existing count)
+
 ### Loop Coverage
+
+- reachable coverage: 100%
+- minimum number of test case: 4
+- test cases:
+    - TC1(notifications = [] → loop executes 0 iterations)
+    - TC2(notifications contains one item with report_id = None → loop executes 1 iteration)
+    - TC3(notifications contains one valid report_id → loop executes 1 iteration and initializes count)
+    - TC4(notifications contains repeated report_id values → loop executes multiple iterations and increments count)
 
 ### Path Coverage
 
+- reachable coverage: 100%
+- minimum number of test case: 4
+- test cases:
+    - TC1(empty notifications list → return empty dictionary)
+    - TC2(notification.report_id is None → continue loop)
+    - TC3(valid report_id first occurrence → initialize count)
+    - TC4(repeated report_id → increment count)
+All independent execution paths of the function are covered.
+
 ### Minimal Suite Test
 
+- test_returns_empty_dictionary_when_notifications_list_is_empty
+- test_skips_notifications_with_none_report_id
+- test_initializes_count_for_first_report_occurrence
+- test_increments_count_for_duplicate_report_id
 
 ## 5 `UserService.update_user`
 

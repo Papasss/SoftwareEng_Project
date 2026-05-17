@@ -106,23 +106,80 @@
 
 ### Control Flow Graph
 
-- ![](../data/img/xxx.xxx)
+ - `![](../data/img/resolve_recipient_control_flow.png)`
 
 ### Atomic Conditions
 
+1) Checking sender role is ADMIN or OPERATOR
+2) Checking message.sender exists
+3) Checking message.sender role is ADMIN or OPERATOR
+4) Checking status_event.changed_by exists
+5) Checking status_event.changed_by role is ADMIN or OPERATOR
+
+
 ### Structural Lower Bound
+
+The formula involves adding +1 to the decisional nodes.
+V(G) = π + 1 = 5 + 1 = 6
 
 ### Node Coverage
 
+- reachable coverage: 100%
+- minimum number of test case: 4
+- test cases:
+    - TC1(sender role ADMIN, returns report.reporter)
+    - TC2(message sender role OPERATOR found in previous messages, returns message.sender)
+    - TC3(status_event.changed_by role ADMIN/OPERATOR found in status history, returns status_event.changed_by)
+    - TC4(no valid recipient found, returns None)
+
 ### Edge Coverage
+
+- reachable coverage: 100%
+- minimum number of test case: 4
+- test cases:
+    - TC1(sender role ADMIN, TRUE branch → returns report.reporter)
+    - TC2(sender role not ADMIN/OPERATOR, previous message sender role OPERATOR found → returns message.sender)
+    - TC3(no valid message sender found, status_event.changed_by role ADMIN/OPERATOR found → returns status_event.changed_by)
+    - TC4(no valid message sender and no valid status history recipient found → returns None)
 
 ### Condition Coverage
 
+- reachable coverage: 100%
+- minimum number of test case: 4
+- test cases:
+    - TC1(sender role ADMIN → condition TRUE, returns report.reporter)
+    - TC2(sender role not ADMIN/OPERATOR, message.sender exists and role is OPERATOR → conditions TRUE, returns message.sender)
+    - TC3(message.sender not found, status_event.changed_by exists and role is ADMIN/OPERATOR → conditions TRUE, returns status_event.changed_by)
+    - TC4(message.sender does not exist and status_event.changed_by does not exist → conditions FALSE, returns None)
+
 ### Loop Coverage
+
+- reachable coverage: 100%
+- minimum number of test case: 4
+- test cases:
+    - TC1(messages = [], status_history = [] → loops execute 0 iterations)
+    - TC2(messages contains one valid OPERATOR sender → loop executes 1 iteration and returns message.sender)
+    - TC3(messages empty, status_history contains one valid ADMIN/OPERATOR → status_history loop executes 1 iteration and returns status_event.changed_by)
+    - TC4(messages and status_history contain no valid ADMIN/OPERATOR → loops execute completely and return None)
 
 ### Path Coverage
 
+- reachable coverage: 100%
+- minimum number of test case: 4
+- test cases:
+    - TC1(sender role ADMIN/OPERATOR → return report.reporter)
+    - TC2(valid ADMIN/OPERATOR sender found in messages → return message.sender)
+    - TC3(valid ADMIN/OPERATOR found in status_history → return status_event.changed_by)
+    - TC4(no valid recipient found → return None)
+
+All independent execution paths of the function are covered.
+
 ### Minimal Suite Test
+
+- test_admin_sender_returns_reporter
+- test_previous_operator_message_used
+- test_status_history_operator_used
+- test_no_recipient_returns_none
 
 ## 3 `NotificationService.notify_status_change`
 

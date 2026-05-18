@@ -189,19 +189,78 @@ All independent execution paths of the function are covered.
 
 ### Atomic Conditions
 
+1) Checking if the report exists
+2) Checking if the user to notify exists
+3) Checking if the report status has actually changed
+4) Checking if a notification for this change already exists
+5) Checking if sending the notification succeeds
+
 ### Structural Lower Bound
+
+The formula involves adding +1 to the decisional nodes:
+V(G) = π + 1 = 5 + 1 = 6
 
 ### Node Coverage
 
+- reachable coverage: 100%
+- minimum number of test case: 5
+- test cases:
+    - TC1(report does not exist → raises ValueError)
+    - TC2(user to notify does not exist → returns without notification)
+    - TC3(report status has not changed → returns without notification)
+    - TC4(notification already exists for this change → skips sending)
+    - TC5(valid report, status changed, notification does not exist → notification sent successfully)
+
 ### Edge Coverage
+
+- reachable coverage: 100%
+- minimum number of test case: 5
+- test cases:
+    - TC1(report does not exist → raise exception)
+    - TC2(user to notify does not exist → branch returns early)
+    - TC3(status unchanged → branch returns early)
+    - TC4(notification already exists → skip sending branch)
+    - TC5(notification created and sent → normal execution path)
 
 ### Condition Coverage
 
+- reachable coverage: 100%
+- minimum number of test case: 5
+- test cases:
+    - TC1(report exists → FALSE, raises exception)
+    - TC2(user exists → FALSE, return early)
+    - TC3(status changed → FALSE, return early)
+    - TC4(notification exists → TRUE, skip sending)
+    - TC5(all TRUE conditions → notification sent successfully)
+
 ### Loop Coverage
+
+- reachable coverage: 100%
+- minimum number of test case: 3
+- test cases:
+    - TC1(empty list of users to notify → loop executes 0 iterations)
+    - TC2(list of users to notify contains one valid user → loop executes 1 iteration)
+    - TC3(list of users to notify contains multiple users → loop executes multiple iterations, notifications sent to each)
 
 ### Path Coverage
 
+- reachable coverage: 100%
+- minimum number of test case: 5
+- test cases:
+    - TC1(report does not exist → raise ValueError)
+    - TC2(user does not exist → return early)
+    - TC3(status unchanged → return early)
+    - TC4(notification already exists → skip sending)
+    - TC5(normal execution → notification sent)
+- All independent execution paths of the function are covered.
+
 ### Minimal Suite Test
+
+- test_notify_status_change_raises_when_report_does_not_exist
+- test_notify_status_change_skips_when_user_does_not_exist
+- test_notify_status_change_skips_when_status_unchanged
+- test_notify_status_change_skips_when_notification_already_exists
+- test_notify_status_change_sends_notification_successfully
 
 
 ## 4 `NotificationService.count_unread_message_notifications_by_report`

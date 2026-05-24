@@ -690,3 +690,148 @@ def test_get_accessible_report_operator_same_category():
     )
 
     assert result == report
+
+# Invalid category type should raise ValidationError
+def test_create_report_invalid_category_type():
+    service = build_service()
+
+    with pytest.raises(ValidationError):
+        service.create_report(
+            reporter=make_user(),
+            category_id="abc",
+            title="title",
+            description="description",
+            latitude=45,
+            longitude=7,
+            photos=[make_photo()],
+        )
+
+# Missing coordinates should raise ValidationError
+def test_create_report_missing_coordinates():
+    service = build_service()
+
+    category = Mock()
+    category.id = 1
+    category.is_active = True
+
+    service.category_repository.get_by_id.return_value = category
+
+    with pytest.raises(ValidationError):
+        service.create_report(
+            reporter=make_user(),
+            category_id=1,
+            title="title",
+            description="description",
+            latitude=None,
+            longitude=None,
+            photos=[make_photo()],
+        )
+
+
+# Photos without filename should be ignored
+def test_create_report_photo_without_filename():
+    service = build_service()
+
+    category = Mock()
+    category.id = 1
+    category.is_active = True
+
+    service.category_repository.get_by_id.return_value = category
+
+    photo = make_photo("")
+
+    with pytest.raises(ValidationError):
+        service.create_report(
+            reporter=make_user(),
+            category_id=1,
+            title="title",
+            description="description",
+            latitude=45,
+            longitude=7,
+            photos=[photo],
+        )
+
+# User reports should be listed
+def test_list_user_reports():
+    service = build_service()
+
+    reports = [make_report()]
+
+    service.report_repository.list_user_reports.return_value = reports
+
+    result = service.list_user_reports(make_user(id=5))
+
+    assert result == reports
+
+    service.report_repository.list_user_reports.assert_called_once_with(5)
+
+# Pending reports should be returned
+def test_list_pending_reports():
+    service = build_service()
+
+    reports = [make_report()]
+
+    service.report_repository.list_pending.return_value = reports
+
+    filters = {
+        "category_id": 1,
+        "date_from": None,
+        "date_to": None,
+    }
+
+    result = service.list_pending_reports(filters)
+
+    assert result == reports
+
+# Operator reports should be returned
+def test_list_operator_reports():
+    service = build_service()
+
+    operator = make_user(
+        role=Role.OPERATOR,
+        category_id=3,
+    )
+
+    reports = [make_report()]
+
+    service.report_repository.list_operator_reports.return_value = reports
+
+    result = service.list_operator_reports(operator)
+
+    assert result == reports
+
+    service.report_repository.list_operator_reports.assert_called_once_with(
+        operator.role,
+        operator.category_id,
+    )
+
+# Anonymous user cannot access private report
+def test_get_accessible_report_private_without_user():
+    service = build_service()
+
+    report = make_report(
+        reporter_id=1,
+        status=ReportStatus.PENDING_APPROVAL,
+    )
+
+    service.report_repository.get_by_id.return_value = report
+
+    with pytest.raises(AuthorizationError):
+        service.get_accessible_report(1)
+
+# Citizen should fail category access validation
+def test_operator_category_access_citizen_denied():
+    citizen = make_user(
+        role=Role.CITIZEN,
+    )
+
+    report = make_report(
+        category_id=1,
+    )
+
+    with pytest.raises(AuthorizationError):
+        ReportService._ensure_operator_category_access(
+            citizen,
+            report,
+        )
+

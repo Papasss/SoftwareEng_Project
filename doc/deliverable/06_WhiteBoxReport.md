@@ -185,7 +185,7 @@ All independent execution paths of the function are covered.
 
 ### Control Flow Graph
 
-- ![](../data/img/xxx.xxx)
+- '![](../data/img/notify_status_change_control_flow.png)'
 
 ### Atomic Conditions
 

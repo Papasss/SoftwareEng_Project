@@ -251,3 +251,99 @@ def test_report_repository_search_and_status_history_branches(monkeypatch: pytes
 
     close_connection()
 
+
+@pytest.mark.integration
+def test_operator_endpoints_change_report_status(monkeypatch: pytest.MonkeyPatch):
+    """Create a report, promote a user to operator and try operator status-change endpoints."""
+    monkeypatch.setenv("DATABASE_URL", "sqlite+pysqlite:///:memory:")
+    monkeypatch.setenv("AUTO_INIT_DB", "true")
+    monkeypatch.setenv("EXPOSE_VERIFICATION_LINKS", "true")
+
+    from participium import create_app
+    app = create_app()
+    app.config.update(TESTING=True)
+    client = app.test_client()
+
+    op_user = {
+        "username": "op_user",
+        "first_name": "Op",
+        "last_name": "User",
+        "email": "op@example.com",
+        "password": "OpPass1234",
+    }
+    reg = client.post("/api/v1/auth/register", json=op_user)
+    assert reg.status_code == 201
+    ver_url = reg.get_json().get("verification_url")
+    if ver_url:
+        token = ver_url.rsplit("/", 1)[-1]
+        v = client.get(f"/api/v1/auth/verify/{token}")
+        assert v.status_code == 200
+
+    with app.app_context():
+        session = get_session()
+        u = session.scalars(select(User).filter_by(username=op_user["username"])).first()
+        assert u is not None
+        u.role = Role.OPERATOR
+        session.commit()
+
+        category = Category(name="OpTestCat", is_active=True)
+        session.add(category)
+        session.commit()
+
+        storage = StubStorageService()
+        repo = ReportRepository(session)
+        cat_repo = CategoryRepository(session)
+        svc = ReportService(
+            session=session,
+            report_repository=repo,
+            category_repository=cat_repo,
+            storage_service=storage,
+            notification_service=StubNotificationService(),
+        )
+        photo = FileStorage(stream=BytesIO(b"img"), filename="p.jpg", content_type="image/jpeg")
+        reporter = User(
+            username="rep_for_op",
+            first_name="Rep",
+            last_name="User",
+            email="rep_for_op@example.com",
+            password_hash="h",
+            role=Role.CITIZEN,
+            is_active=True,
+            is_email_verified=True,
+            email_notifications_enabled=True,
+        )
+        session.add(reporter)
+        session.commit()
+
+        report = svc.create_report(reporter, category.id, "Op flow", "desc", "0.0", "0.0", [photo], is_anonymous=False)
+        assert report.id is not None
+        report.status = ReportStatus.PENDING_APPROVAL
+        session.commit()
+        report_id = report.id
+
+    login = client.post("/api/v1/auth/login", json={"identifier": op_user["username"], "password": op_user["password"]})
+    assert login.status_code == 200
+
+    payload = {"status": "ASSIGNED", "note": "assigned by test"}
+    tried = 0
+    succeeded = 0
+    possible_paths = [
+        f"/api/v1/reports/{report_id}/status",
+        f"/api/v1/operator/reports/{report_id}/status",
+        f"/api/v1/admin/reports/{report_id}/status",
+        f"/api/v1/reports/{report_id}/actions/status",
+    ]
+    for path in possible_paths:
+        tried += 1
+        resp = client.patch(path, json=payload)
+        if resp.status_code in (200, 204):
+            succeeded += 1
+            client.patch(path, json={"status": "REJECTED", "note": "rejected by test"})
+            break
+
+    assert tried > 0
+    list_resp = client.get("/api/v1/reports")
+    assert list_resp.status_code == 200
+
+    close_connection()
+

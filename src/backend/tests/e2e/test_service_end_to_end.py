@@ -146,3 +146,75 @@ def test_verify_invalid_token_returns_error(monkeypatch: pytest.MonkeyPatch):
     assert resp.status_code in (400, 404, 410)
 
     close_connection()
+
+
+@pytest.mark.e2e
+def test_register_duplicate_user_returns_error(monkeypatch: pytest.MonkeyPatch):
+    monkeypatch.setenv("DATABASE_URL", "sqlite+pysqlite:///:memory:")
+    monkeypatch.setenv("AUTO_INIT_DB", "true")
+    monkeypatch.setenv("EXPOSE_VERIFICATION_LINKS", "true")
+
+    app = create_app()
+    app.config.update(TESTING=True)
+    client = app.test_client()
+
+    payload = {
+        "username": "dupuser",
+        "first_name": "D",
+        "last_name": "Up",
+        "email": "dup@example.com",
+        "password": "Dup1234",
+    }
+    r1 = client.post("/api/v1/auth/register", json=payload)
+    assert r1.status_code == 201
+    r2 = client.post("/api/v1/auth/register", json=payload)
+    # duplicate user should be rejected (400 or 409 typically)
+    assert r2.status_code in (400, 409)
+
+    close_connection()
+
+
+@pytest.mark.e2e
+def test_post_report_requires_auth(monkeypatch: pytest.MonkeyPatch):
+    monkeypatch.setenv("DATABASE_URL", "sqlite+pysqlite:///:memory:")
+    monkeypatch.setenv("AUTO_INIT_DB", "true")
+    monkeypatch.setenv("BOOTSTRAP_REFERENCE_DATA", "false")
+    monkeypatch.setenv("BOOTSTRAP_DEMO_DATA", "false")
+
+    app = create_app()
+    app.config.update(TESTING=True)
+    client = app.test_client()
+
+    with app.app_context():
+        session = get_session()
+        session.add(Category(name="AuthReqCat", is_active=True))
+        session.commit()
+
+    payload = {
+        "title": "Auth required",
+        "description": "Should require auth",
+        "latitude": 0.0,
+        "longitude": 0.0,
+        "category": "AuthReqCat",
+    }
+    resp = client.post("/api/v1/reports", json=payload)
+    # unauthenticated create usually returns 401; accept 400/401 for robustness
+    assert resp.status_code in (400, 401)
+
+    close_connection()
+
+
+@pytest.mark.e2e
+def test_get_reports_empty_list(monkeypatch: pytest.MonkeyPatch):
+    monkeypatch.setenv("DATABASE_URL", "sqlite+pysqlite:///:memory:")
+    monkeypatch.setenv("AUTO_INIT_DB", "true")
+
+    app = create_app()
+    app.config.update(TESTING=True)
+    client = app.test_client()
+
+    resp = client.get("/api/v1/reports")
+    assert resp.status_code == 200
+    assert isinstance(resp.get_json(), list)
+
+    close_connection()

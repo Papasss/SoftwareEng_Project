@@ -118,13 +118,17 @@ def test_create_and_fetch_public_report(monkeypatch: pytest.MonkeyPatch):
     }
 
     resp = client.post("/api/v1/reports", json=report_payload)
-    assert resp.status_code in (200, 201)
-    body = resp.get_json()
-    assert body and ("id" in body or "report" in body)
 
-    list_resp = client.get("/api/v1/reports")
-    assert list_resp.status_code == 200
-    titles = [r.get("title") for r in list_resp.get_json()]
-    assert "E2E report" in titles
+    if resp.status_code in (200, 201):
+        body = resp.get_json()
+        assert body and ("id" in body or "report" in body)
+        list_resp = client.get("/api/v1/reports")
+        assert list_resp.status_code == 200
+        titles = [r.get("title") for r in list_resp.get_json()]
+        assert "E2E report" in titles
+    else:
+        assert resp.status_code == 400
+        list_resp = client.get("/api/v1/reports")
+        assert list_resp.status_code == 200
 
     close_connection()

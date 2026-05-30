@@ -71,7 +71,7 @@ def test_categories_endpoint_returns_active_category(monkeypatch: pytest.MonkeyP
     close_connection()
     
 
-    @pytest.mark.e2e
+@pytest.mark.e2e
 def test_create_and_fetch_public_report(monkeypatch: pytest.MonkeyPatch):
     monkeypatch.setenv("DATABASE_URL", "sqlite+pysqlite:///:memory:")
     monkeypatch.setenv("AUTO_INIT_DB", "true")
@@ -130,5 +130,19 @@ def test_create_and_fetch_public_report(monkeypatch: pytest.MonkeyPatch):
         assert resp.status_code == 400
         list_resp = client.get("/api/v1/reports")
         assert list_resp.status_code == 200
+
+    close_connection()
+
+
+@pytest.mark.e2e
+def test_verify_invalid_token_returns_error(monkeypatch: pytest.MonkeyPatch):
+    monkeypatch.setenv("DATABASE_URL", "sqlite+pysqlite:///:memory:")
+    monkeypatch.setenv("AUTO_INIT_DB", "true")
+    application = create_app()
+    application.config.update(TESTING=True)
+    client = application.test_client()
+
+    resp = client.get("/api/v1/auth/verify/this-token-does-not-exist")
+    assert resp.status_code in (400, 404, 410)
 
     close_connection()

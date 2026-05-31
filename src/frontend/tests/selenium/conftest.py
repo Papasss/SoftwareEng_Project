@@ -27,6 +27,8 @@ def driver():
     options.add_argument("--disable-dev-shm-usage")
     options.add_argument("--disable-gpu")
 
+    # enable browser console logging to aid debugging in tests
+    options.set_capability("goog:loggingPrefs", {"browser": "ALL"})
     driver = webdriver.Chrome(options=options)
     driver.set_window_size(1200, 900)
     yield driver

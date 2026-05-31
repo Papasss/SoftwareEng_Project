@@ -2,6 +2,8 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
+from pages.auth_page import login
+
 
 def test_uc02_login_success(driver, frontend_url):
     """UC-02: Login main success scenario.
@@ -12,18 +14,8 @@ def test_uc02_login_success(driver, frontend_url):
     """
     wait = WebDriverWait(driver, 10)
 
-    driver.get(frontend_url)
-    wait.until(EC.element_to_be_clickable((By.ID, "login-link"))).click()
-
-    wait.until(EC.presence_of_element_located((By.ID, "login-form")))
-    driver.find_element(By.ID, "login-identifier").clear()
-    driver.find_element(By.ID, "login-identifier").send_keys("citizen@example.com")
-    driver.find_element(By.ID, "login-password").clear()
-    driver.find_element(By.ID, "login-password").send_keys("Citizen123!")
-    driver.find_element(By.ID, "login-submit").click()
-
-    # Landing page should show dashboard for a citizen
-    wait.until(EC.presence_of_element_located((By.ID, "dashboard-page")))
+    # Use shared login helper
+    login(driver, frontend_url, identifier="citizen@example.com", password="Citizen123!")
     assert "User dashboard" in driver.page_source
 
 

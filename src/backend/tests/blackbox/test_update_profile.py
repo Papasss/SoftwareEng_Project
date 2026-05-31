@@ -55,7 +55,6 @@ def test_verify_username_already_used() -> None:
 def test_verify_update_profile_partial_success() -> None:
     user_service = UserService()
 
-    # Aggiorniamo solo first_name e disabilitiamo le notifiche, lasciando gli altri a None
     updated_user = user_service.update_profile(user=OPERATOR_USER, first_name="Guglielmo", email_notifications_enabled=False)
     
     assert updated_user.first_name == "Guglielmo"

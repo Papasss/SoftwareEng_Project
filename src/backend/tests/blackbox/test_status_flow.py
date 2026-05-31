@@ -10,7 +10,7 @@ import pytest
 # WRONG INPUT VALUE
 @pytest.mark.skip(reason="Disabled.")
 @pytest.mark.parametrize("next_state", [
-    ReportStatus.NEW_STATUS
+    "NotARealStatus"
 ])
 def test_verify_pending_status_success(next_state) -> None:
     current_state = ReportStatus.PENDING_APPROVAL
@@ -167,7 +167,7 @@ def test_verify_rejected_status_error(next_state) -> None:
 # RESOLVED
 @pytest.mark.skip(reason="Disabled.")
 @pytest.mark.parametrize("next_state", [
-    ReportStatus.REJECTED
+    ReportStatus.RESOLVED
 ])
 def test_verify_resolved_status_success(next_state) -> None:
     current_state = ReportStatus.RESOLVED

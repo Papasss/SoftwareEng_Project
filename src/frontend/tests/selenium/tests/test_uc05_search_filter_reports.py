@@ -60,8 +60,18 @@ def ensure_min_reports(backend_api: str, min_count: int = 2):
         assign_resp = s.post(f"{backend_api}/operator/reports/{report_id}/assign")
         if assign_resp.status_code not in (200, 201):
             raise AssertionError(f"Operator assign failed: {assign_resp.status_code} {assign_resp.text}")
-        # small delay so list can update
+        # small delay so server can commit
         time.sleep(0.5)
+
+    # poll backend until we have at least min_count public reports
+    for _ in range(12):
+        list_resp = s.get(f"{backend_api}/reports")
+        if list_resp.status_code == 200:
+            reports = list_resp.json()
+            if len(reports) >= min_count:
+                return
+        time.sleep(1)
+    raise AssertionError(f"Expected at least {min_count} public reports, but backend did not reach that count in time")
 
 
 def test_uc05_search_filter_reports(driver, frontend_url):

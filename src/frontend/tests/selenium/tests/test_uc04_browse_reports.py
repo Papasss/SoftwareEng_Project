@@ -1,6 +1,7 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import TimeoutException
 import os
 import time
 import requests
@@ -20,9 +21,13 @@ def test_uc04_browse_reports(driver, frontend_url):
     # 1) Open home page
     driver.get(frontend_url)
 
-    # 2) Wait for public report table to be populated
+    # 2) Wait for public report table to be present, then try to read rows
     wait.until(EC.presence_of_element_located((By.ID, "public-report-table-body")))
-    rows = driver.find_elements(By.CSS_SELECTOR, "#public-report-table-body tr")
+    try:
+        wait.until(lambda d: len(d.find_elements(By.CSS_SELECTOR, "#public-report-table-body tr")) > 0)
+        rows = driver.find_elements(By.CSS_SELECTOR, "#public-report-table-body tr")
+    except TimeoutException:
+        rows = []
 
     # If there are no public reports, create one and publish it via the backend API
     if len(rows) == 0:
@@ -75,13 +80,33 @@ def test_uc04_browse_reports(driver, frontend_url):
         if assign_resp.status_code not in (200, 201):
             raise AssertionError(f"Operator assign failed: {assign_resp.status_code} {assign_resp.text}")
 
-        # give frontend a moment to refresh public list
-        time.sleep(1)
+        # Poll backend until the report is visible as public (give frontend time to refresh)
+        found = False
+        for _ in range(12):  # ~12 seconds max
+            try:
+                r = s.get(f"{backend_api}/reports")
+                if r.status_code == 200:
+                    for rep in r.json():
+                        if rep.get("id") == report_id and rep.get("is_public"):
+                            found = True
+                            break
+                if found:
+                    break
+            except Exception:
+                pass
+            time.sleep(1)
 
-        # reload page and read rows again
+        if not found:
+            raise AssertionError(f"Created report {report_id} did not become public within timeout")
+
+        # reload page and wait for rows to appear (give frontend time to render)
         driver.get(frontend_url)
         wait.until(EC.presence_of_element_located((By.ID, "public-report-table-body")))
-        rows = driver.find_elements(By.CSS_SELECTOR, "#public-report-table-body tr")
+        try:
+            wait.until(lambda d: len(d.find_elements(By.CSS_SELECTOR, "#public-report-table-body tr")) > 0, message="No rows in public report table after reload")
+            rows = driver.find_elements(By.CSS_SELECTOR, "#public-report-table-body tr")
+        except TimeoutException:
+            rows = []
 
     assert len(rows) > 0, "No public reports found to browse on the map"
 

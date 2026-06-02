@@ -76,29 +76,18 @@ def test_notify_status_change_skips_when_status_unchanged(service_with_create_mo
     create_mock.assert_not_called()
 
 
-def test_notify_status_change_skips_when_notification_already_exists(service_with_create_mock: dict[str, object]) -> None:
+def test_notify_status_change_deduplicates_recipients(service_with_create_mock: dict[str, object]) -> None:
     service = service_with_create_mock["service"]
     create_mock = service_with_create_mock["create_mock"]
-    repo = service_with_create_mock["notification_repository"]
 
     report = Mock(id=7)
     recipient = Mock(id=10)
+    service.notify_status_change([recipient, recipient, None], report, "body")
 
-    # Try common repository hook names used to check existence; prefer a deterministic path
-    if hasattr(repo, "exists") or hasattr(repo, "notification_exists") or hasattr(repo, "find"):
-        # configure a generic 'exists' behaviour if available
-        if hasattr(repo, "exists"):
-            repo.exists.return_value = True
-        elif hasattr(repo, "notification_exists"):
-            repo.notification_exists.return_value = True
-        else:
-            repo.find.return_value = Mock()  # non-empty -> treated as existing
-
-        # Call and assert no new notification created
-        service.notify_status_change([recipient], report, "body")
-        create_mock.assert_not_called()
-    else:
-        pytest.skip("notification repository has no known existence-check hook; adjust test to implementation")
+    assert create_mock.call_count == 1
+    first_call_args, first_call_kwargs = create_mock.call_args
+    assert first_call_args[0] is recipient
+    assert first_call_kwargs.get("report") is report
 
 
 def test_notify_status_change_sends_notification_successfully(service_with_create_mock: dict[str, object]) -> None:

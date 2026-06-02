@@ -103,7 +103,8 @@ def test_create_report_raises_when_category_is_inactive(
     active_category: Category,
 ) -> None:
     service = report_service_bundle["service"]
-    report_service_bundle["category_repository"].get_by_id.return_value = active_category
+    inactive_category = Category(id=5, name="Road", is_active=False)
+    report_service_bundle["category_repository"].get_by_id.return_value = inactive_category
 
     with pytest.raises(ValidationError, match="A valid active category is required\."):
         service.create_report(

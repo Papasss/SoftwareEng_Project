@@ -24,7 +24,7 @@ def _user(user_id: int, role: Role):
 
 
 def test_admin_sender_returns_reporter():
-    reporter = _user(1, Role.REPORTER)
+    reporter = _user(1, Role.CITIZEN)
     sender = _user(2, Role.ADMIN)
 
     report = SimpleNamespace(
@@ -43,7 +43,7 @@ def test_admin_sender_returns_reporter():
 
 
 def test_previous_operator_message_used():
-    sender = _user(1, Role.REPORTER)
+    sender = _user(1, Role.CITIZEN)
     operator = _user(2, Role.OPERATOR)
 
     old_message = SimpleNamespace(
@@ -70,7 +70,7 @@ def test_previous_operator_message_used():
 
 
 def test_status_history_operator_used():
-    sender = _user(1, Role.REPORTER)
+    sender = _user(1, Role.CITIZEN)
     operator = _user(2, Role.OPERATOR)
 
     status_event = SimpleNamespace(
@@ -96,7 +96,7 @@ def test_status_history_operator_used():
 
 
 def test_no_recipient_returns_none():
-    sender = _user(1, Role.REPORTER)
+    sender = _user(1, Role.CITIZEN)
 
     repository = Mock()
     repository.list_for_report.return_value = []

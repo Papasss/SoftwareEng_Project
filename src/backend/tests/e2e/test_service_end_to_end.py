@@ -218,9 +218,7 @@ def test_get_reports_empty_list(monkeypatch: pytest.MonkeyPatch):
     assert isinstance(resp.get_json(), list)
 
     close_connection()
-
-
-    @pytest.mark.e2e
+@pytest.mark.e2e
 def test_get_nonexistent_report_returns_404(monkeypatch: pytest.MonkeyPatch):
     monkeypatch.setenv("DATABASE_URL", "sqlite+pysqlite:///:memory:")
     monkeypatch.setenv("AUTO_INIT_DB", "true")

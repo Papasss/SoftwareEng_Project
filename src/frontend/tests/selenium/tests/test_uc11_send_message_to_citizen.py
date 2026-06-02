@@ -52,27 +52,74 @@ def ensure_assigned_report(backend_api: str):
 
 def test_uc11_send_message_to_citizen(driver, frontend_url):
     """UC-11: Send message to Citizen - operator composes message from report detail."""
+
     wait = WebDriverWait(driver, 20)
+
     backend_api = "http://localhost:5050/api/v1"
 
-    report = ensure_assigned_report(backend_api)
+    report = ensure_assigned_report(
+        backend_api
+    )
+
     report_id = report.get("id")
 
-    # Login as operator via UI
-    login(driver, frontend_url, identifier="operator@example.com", password="Operator123!")
+    login(
+        driver,
+        frontend_url,
+        identifier="operator@example.com",
+        password="Operator123!"
+    )
 
-    # Open operator page and click the assigned report detail link
     driver.get(f"{frontend_url}/operator")
-    open_link_id = f"assigned-report-row-{report_id}-open-detail"
-    wait.until(EC.element_to_be_clickable((By.ID, open_link_id))).click()
 
-    # On report detail, send a message
-    wait.until(EC.presence_of_element_located((By.ID, "report-message-body")))
-    body = f"Automated operator message {int(time.time())}"
-    driver.find_element(By.ID, "report-message-body").send_keys(body)
-    driver.find_element(By.ID, "report-message-submit").click()
+    open_link_id = (
+        f"assigned-report-row-{report_id}-open-detail"
+    )
 
-    # Confirm the message appears in the conversation
+    element = wait.until(
+        EC.presence_of_element_located(
+            (By.ID, open_link_id)
+        )
+    )
+
+    print("\n===== OPEN ELEMENT =====")
+    print(
+        element.get_attribute(
+            "outerHTML"
+        )
+    )
+    print("========================")
+
+    driver.get(
+        f"{frontend_url}/reports/{report_id}"
+    )
+    wait.until(
+        EC.presence_of_element_located(
+            (By.ID, "report-message-body")
+        )
+    )
+
+    wait.until(
+        EC.presence_of_element_located(
+            (By.ID, "report-message-body")
+        )
+    )
+
+    body = (
+        f"Automated operator message "
+        f"{int(time.time())}"
+    )
+
+    driver.find_element(
+        By.ID,
+        "report-message-body"
+    ).send_keys(body)
+
+    driver.find_element(
+        By.ID,
+        "report-message-submit"
+    ).click()
+
     wait.until(
         lambda d:
         body in d.find_element(

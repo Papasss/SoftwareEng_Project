@@ -1,7 +1,6 @@
 import time
 import os
 import requests
-from selenium.webdriver.support.ui import Select
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -163,17 +162,18 @@ def test_uc10_manage_report_update_status(driver, frontend_url):
     )
 
     next_opt = None
-
-    from selenium.webdriver.support.ui import Select
-
-    select_element = Select(select)
-
     for opt in options:
         val = opt.get_attribute("value")
 
         if val and val != current:
             next_opt = val
-            select_element.select_by_value(val)
+            driver.execute_script("""
+            arguments[0].value = arguments[1];
+            arguments[0].dispatchEvent(new Event('change', { bubbles: true }));
+            """, select, val)
+
+            time.sleep(1)
+
             break
 
 

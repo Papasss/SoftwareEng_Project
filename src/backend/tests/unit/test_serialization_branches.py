@@ -2,7 +2,10 @@ from __future__ import annotations
 
 from datetime import datetime, timedelta
 
+import pytest
+
 from participium.core import serialization
+from participium.core.utils import build_csv, parse_date
 from participium.models.enums import Role, ReportStatus
 from participium.models.report import Report, ReportPhoto, ReportStatusHistory, ReportFollower
 from participium.models.category import Category
@@ -95,3 +98,21 @@ def test_serialize_report_detail_includes_messages_and_history_ordering():
     data = serialization.serialize_report_detail(report, viewer=reporter, include_messages=True)
     # history should be sorted by created_at
     assert data["status_history"][0]["id"] == 1
+
+
+def test_parse_date_and_build_csv_cover_utility_branches():
+    parsed = parse_date("2026-06-02T12:34:56")
+    assert parsed.year == 2026
+    assert parsed.month == 6
+    assert parse_date(None) is None
+
+    with pytest.raises(ValueError):
+        parse_date("not-a-date")
+
+    csv_text = build_csv(
+        [{"id": 1, "title": "Example"}],
+        ["id", "title"],
+    )
+
+    assert "id,title" in csv_text
+    assert "1,Example" in csv_text

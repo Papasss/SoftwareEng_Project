@@ -10,26 +10,73 @@ from pages.auth_page import login
 
 
 def ensure_report_with_operator_message(backend_api: str):
-    # create a report and have the operator post a message via API
     s_op = requests.Session()
-    op_login = s_op.post(f"{backend_api}/auth/login", json={"identifier": "operator@example.com", "password": "Operator123!"})
+
+    op_login = s_op.post(
+        f"{backend_api}/auth/login",
+        json={
+            "identifier": "operator@example.com",
+            "password": "Operator123!"
+        }
+    )
+
     if op_login.status_code != 200:
-        raise AssertionError(f"Operator API login failed: {op_login.status_code} {op_login.text}")
-    op_profile = s_op.get(f"{backend_api}/users/me").json()
+        raise AssertionError(
+            f"Operator API login failed: "
+            f"{op_login.status_code} {op_login.text}"
+        )
+
+    op_profile = s_op.get(
+        f"{backend_api}/users/me"
+    ).json()
+
     operator_category_id = op_profile.get("category_id")
+
     if not operator_category_id:
-        raise AssertionError("Operator has no category assigned; cannot create report")
+        raise AssertionError(
+            "Operator has no category assigned; "
+            "cannot create report"
+        )
 
     c = requests.Session()
-    login_resp = c.post(f"{backend_api}/auth/login", json={"identifier": "citizen@example.com", "password": "Citizen123!"})
-    if login_resp.status_code != 200:
-        raise AssertionError(f"Citizen API login failed: {login_resp.status_code} {login_resp.text}")
 
-    asset_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "../assets/test-photo.png"))
+    login_resp = c.post(
+        f"{backend_api}/auth/login",
+        json={
+            "identifier": "citizen@example.com",
+            "password": "Citizen123!"
+        }
+    )
+
+    if login_resp.status_code != 200:
+        raise AssertionError(
+            f"Citizen API login failed: "
+            f"{login_resp.status_code} {login_resp.text}"
+        )
+
+    asset_path = os.path.abspath(
+        os.path.join(
+            os.path.dirname(__file__),
+            "../assets/test-photo.png"
+        )
+    )
+
     unique = str(int(time.time() * 1000))
+
     title = f"Selenium reply report {unique}"
+
     with open(asset_path, "rb") as f:
-        files = [("photos", (os.path.basename(asset_path), f, "image/png"))]
+        files = [
+            (
+                "photos",
+                (
+                    os.path.basename(asset_path),
+                    f,
+                    "image/png"
+                )
+            )
+        ]
+
         data = {
             "title": title,
             "description": "Auto-created report for UC-12 test",
@@ -38,46 +85,97 @@ def ensure_report_with_operator_message(backend_api: str):
             "longitude": "7.686850",
             "is_anonymous": "false",
         }
-        resp = c.post(f"{backend_api}/reports", data=data, files=files)
+
+        resp = c.post(
+            f"{backend_api}/reports",
+            data=data,
+            files=files
+        )
+
     if resp.status_code not in (200, 201):
-        raise AssertionError(f"API create report failed: {resp.status_code} {resp.text}")
+        raise AssertionError(
+            f"API create report failed: "
+            f"{resp.status_code} {resp.text}"
+        )
+
     report = resp.json()
 
-    assign_resp = s_op.post(f"{backend_api}/operator/reports/{report.get('id')}/assign")
-    if assign_resp.status_code not in (200, 201):
-        raise AssertionError(f"Operator assign failed: {assign_resp.status_code} {assign_resp.text}")
+    assign_resp = s_op.post(
+        f"{backend_api}/operator/reports/{report.get('id')}/assign"
+    )
 
-    # operator posts initial message via API
+    if assign_resp.status_code not in (200, 201):
+        raise AssertionError(
+            f"Operator assign failed: "
+            f"{assign_resp.status_code} {assign_resp.text}"
+        )
+
     msg_body = f"Operator initial message {int(time.time())}"
-    post_resp = s_op.post(f"{backend_api}/reports/{report.get('id')}/messages", json={"body": msg_body})
+
+    post_resp = s_op.post(
+        f"{backend_api}/reports/{report.get('id')}/messages",
+        json={"body": msg_body}
+    )
+
     if post_resp.status_code not in (200, 201):
-        raise AssertionError(f"Operator post message failed: {post_resp.status_code} {post_resp.text}")
+        raise AssertionError(
+            f"Operator post message failed: "
+            f"{post_resp.status_code} {post_resp.text}"
+        )
 
     return report, msg_body
 
 
 def test_uc12_reply_to_operator_message(driver, frontend_url):
-    """UC-12: Reply to Municipal Operator message - citizen replies to an operator message."""
+    """UC-12: Reply to Municipal Operator message."""
+
     wait = WebDriverWait(driver, 20)
+
     backend_api = "http://localhost:5050/api/v1"
 
-    report, initial = ensure_report_with_operator_message(backend_api)
+    report, initial = ensure_report_with_operator_message(
+        backend_api
+    )
+
     report_id = report.get("id")
 
-    # Login as citizen via UI
-    login(driver, frontend_url, identifier="citizen@example.com", password="Citizen123!")
+    login(
+        driver,
+        frontend_url,
+        identifier="citizen@example.com",
+        password="Citizen123!"
+    )
 
-    # Open report detail
     driver.get(f"{frontend_url}/reports/{report_id}")
-    wait.until(EC.presence_of_element_located((By.ID, "report-detail-title")))
 
-    # Reply to the operator message
+    wait.until(
+        EC.presence_of_element_located(
+            (By.ID, "report-detail-title")
+        )
+    )
+
     reply = f"Citizen reply {int(time.time())}"
-    wait.until(EC.presence_of_element_located((By.ID, "report-message-body")))
-    driver.find_element(By.ID, "report-message-body").send_keys(reply)
-    driver.find_element(By.ID, "report-message-submit").click()
 
-    # Verify reply appears in conversation
-    wait.until(EC.presence_of_element_located((By.ID, "messages-list")))
-    messages_text = driver.find_element(By.ID, "messages-list").text
-    assert reply in messages_text, "Citizen reply not visible in conversation"
+    wait.until(
+        EC.presence_of_element_located(
+            (By.ID, "report-message-body")
+        )
+    )
+
+    driver.find_element(
+        By.ID,
+        "report-message-body"
+    ).send_keys(reply)
+
+    driver.find_element(
+        By.ID,
+        "report-message-submit"
+    ).click()
+
+    wait.until(
+        lambda d:
+        reply in d.find_element(
+            By.ID,
+            "messages-list"
+        ).text
+    )

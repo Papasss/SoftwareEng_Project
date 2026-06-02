@@ -73,6 +73,10 @@ def test_uc11_send_message_to_citizen(driver, frontend_url):
     driver.find_element(By.ID, "report-message-submit").click()
 
     # Confirm the message appears in the conversation
-    wait.until(EC.presence_of_element_located((By.ID, "messages-list")))
-    messages = driver.find_element(By.ID, "messages-list").text
-    assert body in messages, "Operator message not visible in conversation"
+    wait.until(
+        lambda d:
+        body in d.find_element(
+            By.ID,
+            "messages-list"
+        ).text
+    )

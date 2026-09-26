@@ -4,19 +4,34 @@ Suggested test file: `test_authenticate.py`
 
 Prototype: `authenticate(identifier: str, password: str) -> User`
 
-| TC-ID | identifier | password | Expected | Fixture |
-| :---- | :--------- | :------- | :------- | :------ |
-|  |  |  |  |  |
+| TC-ID   | identifier       | password           | Expected                  | Fixture       |
+| :------ | :--------------- | :----------------- | :------------------------ | :------------ |
+| AUTH-01 | Valid username   | Correct password   | User returned succesfully | Existing user |
+| AUTH-02 | Valid email      | Correct password   | User returned succesfully | Existing user |
+| AUTH-03 | Valid username   | Incorrect password | AuthenticationError       | Existing user |
+| AUTH-04 | Valid email      | Incorrect password | AuthenticationError       | Existing user |
+| AUTH-05 | Invalid username | Any password       | AuthenticationError       | None          |
+| AUTH-06 | Invalid email    | Any password       | AuthenticationError       | None          |
+| AUTH-07 | ""               | Any password       | ValidationError           | None          |
+| AUTH-08 | Valid username   | ""                 | ValidationError           | Existing user |
+| AUTH-09 | Valid email      | ""                 | ValidationError           | Existing user |
+| AUTH-10 | ""               | ""                 | ValidationError           | None          |
+| AUTH-11 | Inactive user    | Correct password   | AuthorizationError        | Inactive user |
 
 ## 2 `participium.core.utils.parse_date`
 
-Suggested test file: `test_parse_date.py`
+Suggested test file: `![alt text](image.png).py`
 
 Prototype: `parse_date(value: str | None) -> datetime | None`
 
+
 | TC-ID | value | Expected | Fixture |
-| :---- | :---- | :------- | :------ |
-|  |  |  |  |
+|:------|:------|:----------|:---------|
+| DATE-01 | `"2025-05-01"` | Datetime object returned | None |
+| DATE-02 | `None` | None returned | None |
+| DATE-03 | `"invalid-date"` | Invalid date format error | None |
+| DATE-04 | `""` | Empty date value error | None |
+| DATE-05 | `"2025/05/01"` | Unsupported date format error | None |
 
 ## 3 `participium.core.status_flow.ensure_transition_allowed`
 
@@ -32,19 +47,64 @@ Allowed transitions:
 `Rejected -> Rejected`;
 `Resolved -> Resolved`.
 
-| TC-ID | current_status | next_status | Expected | Fixture |
-| :---- | :------------- | :---------- | :------- | :------ |
-|  |  |  |  |  |
+| TC-ID  | current_status   | next_status       | Expected        | Fixture |
+| :----  | :-------------   | :----------       | :-------------- | :------ |
+|  3.1.1 | PENDING_APPROVAL | PENDING_APPROVAL  | True            | None    |
+|  3.1.2 | PENDING_APPROVAL | ASSIGNED          | True            | None    |
+|  3.1.3 | PENDING_APPROVAL | REJECTED          | True            | None    |
+|  3.1.4 | PENDING_APPROVAL | RESOLVED          | ValidationError | None    |
+|  3.1.5 | PENDING_APPROVAL | IN_PROGRESS       | ValidationError | None    |
+|  3.1.6 | PENDING_APPROVAL | SUSPENDED         | ValidationError | None    |
+|  3.2.1 | ASSIGNED         | ASSIGNED          | True            | None    |
+|  3.2.2 | ASSIGNED         | IN_PROGRESS       | True            | None    |
+|  3.2.3 | ASSIGNED         | SUSPENDED         | True            | None    |
+|  3.2.4 | ASSIGNED         | RESOLVED          | True            | None    |
+|  3.2.5 | ASSIGNED         | PENDING_APPROVAL  | ValidationError | None    |
+|  3.2.6 | ASSIGNED         | REJECTED          | ValidationError | None    |
+|  3.3.1 | IN_PROGRESS      | IN_PROGRESS       | True            | None    |
+|  3.3.2 | IN_PROGRESS      | SUSPENDED         | True            | None    |
+|  3.3.3 | IN_PROGRESS      | RESOLVED          | True            | None    |
+|  3.3.4 | IN_PROGRESS      | ASSIGNED          | ValidationError | None    |
+|  3.3.5 | IN_PROGRESS      | PENDING_APPROVAL  | ValidationError | None    |
+|  3.3.6 | IN_PROGRESS      | REJECTED          | ValidationError | None    |
+|  3.4.1 | SUSPENDED        | IN_PROGRESS       | True            | None    |
+|  3.4.2 | SUSPENDED        | SUSPENDED         | True            | None    |
+|  3.4.3 | SUSPENDED        | RESOLVED          | True            | None    |
+|  3.4.4 | SUSPENDED        | ASSIGNED          | ValidationError | None    |
+|  3.4.5 | SUSPENDED        | PENDING_APPROVAL  | ValidationError | None    |
+|  3.4.6 | SUSPENDED        | REJECTED          | ValidationError | None    |
+|  3.5.1 | REJECTED         | REJECTED          | True            | None    |
+|  3.5.2 | REJECTED         | SUSPENDED         | ValidationError | None    |
+|  3.5.3 | REJECTED         | RESOLVED          | ValidationError | None    |
+|  3.5.4 | REJECTED         | ASSIGNED          | ValidationError | None    |
+|  3.5.5 | REJECTED         | PENDING_APPROVAL  | ValidationError | None    |
+|  3.5.6 | REJECTED         | IN_PROGRESS       | ValidationError | None    |
+|  3.6.1 | RESOLVED         | RESOLVED          | True            | None    |
+|  3.6.2 | RESOLVED         | SUSPENDED         | ValidationError | None    |
+|  3.6.3 | RESOLVED         | REJECTED          | ValidationError | None    |
+|  3.6.4 | RESOLVED         | ASSIGNED          | ValidationError | None    |
+|  3.6.5 | RESOLVED         | PENDING_APPROVAL  | ValidationError | None    |
+|  3.6.6 | RESOLVED         | IN_PROGRESS       | ValidationError | None    |
+|  3.7.1 | PENDING_APPROVAL | NEW_STATUS        | ValidationError | None    |
 
-## 4 `participium.services.report_service.ReportService.create_report`
+## 4 participium.services.report_service.ReportService.create_report
 
-Suggested test file: `test_create_report.py`
+Suggested test file: test_create_report.py
 
-Prototype: `create_report(reporter: User, category_id: int | str | None, title: str | None, description: str | None, latitude: float | str | None, longitude: float | str | None, photos: list[FileStorage], is_anonymous: bool = False) -> Report`
+Prototype: create_report(reporter: User, category_id: int | str | None, title: str | None, description: str | None, latitude: float | str | None, longitude: float | str | None, photos: list[FileStorage], is_anonymous: bool = False) -> Report
 
 | TC-ID | reporter | category_id | title | description | latitude | longitude | photos | is_anonymous | Expected | Fixture |
-| :---- | :------- | :---------- | :---- | :---------- | :------- | :-------- | :----- | :----------- | :------- | :------ |
-|  |  |  |  |  |  |  |  |  |  |  |
+|:------|:----------|:-------------|:------|:-------------|:----------|:-----------|:--------|:---------------|:----------|:---------|
+| REPORT-01 | Valid user | Valid category | "Broken streetlight" | "Light not working" | 45.0703 | 7.6869 | Valid image list | False | Report created | Existing user and category |
+| REPORT-02 | Valid user | Valid category | "Road damage" | "Large pothole" | 45.0703 | 7.6869 | [] | False | Report created | Existing user and category |
+| REPORT-03 | Valid user | Invalid category | "Garbage issue" | "Overflowing bins" | 45.0703 | 7.6869 | [] | False | Category error | Existing user |
+| REPORT-04 | Valid user | Valid category | "" | "Description" | 45.0703 | 7.6869 | [] | False | Validation error | Existing user and category |
+| REPORT-05 | Valid user | Valid category | "Water leakage" | "" | 45.0703 | 7.6869 | [] | False | Validation error | Existing user and category |
+| REPORT-06 | Valid user | Valid category | "Traffic issue" | "Heavy blockage" | 999 | 7.6869 | [] | False | Invalid coordinates | Existing user and category |
+| REPORT-07 | None | Valid category | "Street issue" | "Street blocked" | 45.0703 | 7.6869 | [] | False | Authentication error | Existing category |
+| REPORT-08 | Valid user | Valid category | "Illegal dumping" | "Waste near road" | 45.0703 | 7.6869 | Invalid file type | False | File validation error | Existing user and category |
+| REPORT-09 | Valid user | Valid category | "Noise complaint" | "Construction noise" | 45.0703 | 7.6869 | Valid image list | True | Anonymous report created | Existing user and category |
+| REPORT-10 | Valid user | Valid category | Very long title | "Description" | 45.0703 | 7.6869 | [] | False | Validation error | Existing user and category |
 
 ## 5 `participium.services.report_service.ReportService.update_status`
 
@@ -52,9 +112,15 @@ Suggested test file: `test_update_status.py`
 
 Prototype: `update_status(report_id: int, operator: User, next_status_value: str, note: str | None = None) -> Report`
 
-| TC-ID | report_id | operator | next_status_value | note | Expected | Fixture |
-| :---- | :-------- | :------- | :---------------- | :--- | :------- | :------ |
-|  |  |  |  |  |  |  |
+| TC-ID | report_id | operator  | next_status_value | note | Expected              | Fixture      |
+| :---- | :-------- | :-------- | :---------------- | :--- | :-------------------- | :------------|
+| 5.1   |  201      |  Citizen  |  Assigned         | None | AuthorizationError    | User, Report |
+| 5.2   |  201      |  Admin    |  Assigned         | None | AuthorizationError    | User, Report |
+| 5.3   |  201      |  Operator |  Assigned         | None | NotFoundError         | User, Report |
+| 5.4   |  201      |  Operator |  Invalid Status   | None | ValidationError       | User, Report |
+| 5.5   |  201      |  Operator |  Rejected         | None | ValidationError       | User, Report |
+| 5.6   |  201      |  Operator |  Resolved         | None | ValidationError       | User, Report |
+| 5.7   |  201      |  Operator |  Rejected         | The problem no longer exists. | ReportStatus.REJECTED | User, Report |
 
 ## 6 `participium.services.report_service.ReportService.list_public_reports`
 
@@ -63,19 +129,32 @@ Suggested test file: `test_public_reports.py`
 Prototype: `list_public_reports(category_id: int | None = None, status: ReportStatus | None = None, date_from: datetime | None = None, date_to: datetime | None = None, sort: str = "desc") -> list[Report]`
 
 | TC-ID | category_id | status | date_from | date_to | sort | Expected | Fixture |
-| :---- | :---------- | :----- | :-------- | :------ | :--- | :------- | :------ |
-|  |  |  |  |  |  |  |  |
+|:------|:-------------|:--------|:------------|:----------|:------|:----------|:---------|
+| LIST-01 | `None` | `None` | `None` | `None` | `"desc"` | Public reports returned successfully | Existing public reports |
+| LIST-02 | Valid category | `None` | `None` | `None` | `"desc"` | Reports filtered by category | Existing category and reports |
+| LIST-03 | `None` | `Resolved` | `None` | `None` | `"desc"` | Resolved reports returned | Existing resolved reports |
+| LIST-04 | `None` | `None` | Valid start date | Valid end date | `"desc"` | Reports filtered by date range | Existing dated reports |
+| LIST-05 | `None` | `None` | `None` | `None` | `"asc"` | Reports sorted in ascending order | Existing public reports |
+| LIST-06 | Invalid category | `None` | `None` | `None` | `"desc"` | Invalid category ID | None |
+| LIST-07 | `None` | Invalid status | `None` | `None` | `"desc"` | Invalid report status | None |
+| LIST-08 | `None` | `None` | Future date | Past date | `"desc"` | Invalid date range | None |
+| LIST-09 | `None` | `None` | `None` | `None` | Invalid sort value | Invalid sorting option | Existing public reports |
 
+## 7 participium.services.messaging_service.MessagingService.send_message
 
-## 7 `participium.services.messaging_service.MessagingService.send_message`
+Suggested test file: test_send_message.py
 
-Suggested test file: `test_send_message.py`
-
-Prototype: `send_message(report: Report, sender: User, body: str) -> Message`
+Prototype: send_message(report: Report, sender: User, body: str) -> Message
 
 | TC-ID | report | sender | body | Expected | Fixture |
-| :---- | :----- | :----- | :--- | :------- | :------ |
-|  |  |  |  |  |  |
+|:------|:--------|:--------|:------|:----------|:---------|
+| MSG-01 | Valid report | Valid user | "Issue still unresolved" | Message sent successfully | Existing report and authorized user |
+| MSG-02 | Valid report | Valid user | "" | Empty message error | Existing report and authorized user |
+| MSG-03 | Closed report | Valid user | "Need update" | Messaging not allowed for closed report | Existing closed report |
+| MSG-04 | Invalid report | Valid user | "Any update?" | Report not found | Existing user |
+| MSG-05 | Valid report | Unauthorized user | "Checking status" | User authorization required | Existing report and unauthorized user |
+| MSG-06 | Valid report | Valid user | Very long message | Message sent successfully | Existing report and authorized user |
+| MSG-07 | Valid report | None | "Test message" | User authentication required | Existing report |
 
 ## 8 `participium.core.security.verify_password`
 
@@ -83,19 +162,33 @@ Suggested test file: `test_verify_password.py`
 
 Prototype: `verify_password(password: str, password_hash: str) -> bool`
 
-| TC-ID | password | password_hash | Expected | Fixture |
-| :---- | :------- | :------------ | :------- | :------ |
-|  |  |  |  |  |
+| TC-ID  | password           | password_hash          | Expected | Fixture          |
+| :----- | :----------------- | :--------------------- | :------- | :--------------- |
+| PSW-01 | Correct password   | Matching valid hash    | True     | Precomputed hash |
+| PSW-02 | Incorrect password | Valid hash             | False    | Precomputed hash |
+| PSW-03 | ""                 | Valid hash             | False    | Precomputed hash |
+| PSW-04 | Correct password   | Invalid/corrupted hash | False    | None             |
+| PSW-05 | Incorrect password | Invalid/corrupted hash | False    | None             |
+| PSW-06 | ""                 | Invalid/corrupted hash | False    | None             |
+
+
+
 
 ## 9 `participium.services.notification_service.NotificationService.create_notification`
 
 Suggested test file: `test_create_notification.py`
 
-Prototype: `create_notification(user: User | None, notification_type: NotificationType, title: str, body: str, report: Report | None = None) -> Notification | None`
+Prototype: `create_notification(user: User | None, notification_type: str, title: str, body: str, report: Report | None = None) -> Notification`
 
 | TC-ID | user | notification_type | title | body | report | Expected | Fixture |
-| :---- | :--- | :---------------- | :---- | :--- | :----- | :------- | :------ |
-|  |  |  |  |  |  |  |  |
+|:------|:------|:------------------|:------|:------|:--------|:----------|:---------|
+| NOTIF-01 | Valid user | Valid type | `"Report updated"` | `"Your report status changed"` | Valid report | Notification created successfully | Existing user and report |
+| NOTIF-02 | `None` | System type | `"Maintenance notice"` | `"System update tonight"` | `None` | System notification created successfully | None |
+| NOTIF-03 | Valid user | Invalid type | `"Alert"` | `"Test notification"` | `None` | Invalid notification type | Existing user |
+| NOTIF-04 | Valid user | Valid type | `""` | `"Notification body"` | `None` | Empty notification title | Existing user |
+| NOTIF-05 | Valid user | Valid type | `"Reminder"` | `""` | `None` | Empty notification body | Existing user |
+| NOTIF-06 | Valid user | Valid type | `"Status update"` | Very long message | Valid report | Notification created successfully | Existing user and report |
+| NOTIF-07 | Invalid user | Valid type | `"Warning"` | `"Unauthorized access"` | `None` | Invalid user account | None |validation error | None |
 
 ## 10 `participium.services.user_service.UserService.update_profile`
 
@@ -105,4 +198,6 @@ Prototype: `update_profile(user: User, username: str | None = None, first_name: 
 
 | TC-ID | user | username | first_name | last_name | email_notifications_enabled | profile_picture | Expected | Fixture |
 | :---- | :--- | :------- | :--------- | :-------- | :-------------------------- | :-------------- | :------- | :------ |
-|  |  |  |  |  |  |  |  |  |
+| UPD-01 | OPERATOR_USER | None | Guglielmo | None | False | None | First name and email_notified updated | User |
+| UPD-02 | ADMIN_USER    | rolando.ilfenomeno | Rolando | Nullazzo | False | photo_storage | All fields updated | User, Filestorage |
+| UPD-03 | CITIZEN_USER  | fausto.gervasoni | None | None | None | None | ValidationError | User |
